@@ -1,5 +1,14 @@
 <template>
   <div class="login-container">
+    <!-- 粒子背景 -->
+    <ParticlesBg
+      class="particles-background"
+      :quantity="550"
+      :ease="60"
+      :color="'#787878'"
+      :staticity="20"
+    />
+
     <!-- 左侧轮播图区域 -->
     <div class="carousel-container">
       <div class="carousel-content">
@@ -69,9 +78,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { animate, createTimeline, createTimer } from 'animejs'
+import ParticlesBg from '@/components/ParticlesBg.vue'
 
 const router = useRouter()
 const email = ref('')
@@ -250,8 +260,12 @@ const handleLogin = () => {
     password: password.value,
   })
 
-  // 登录成功后跳转
-  // router.push('/')
+  // 登录成功后根据角色跳转
+  if (activeTab.value === '学生端') {
+    router.push('/student')
+  } else {
+    router.push('/teacher')
+  }
 }
 
 onMounted(() => {
@@ -282,6 +296,14 @@ onUnmounted(() => {
   width: 100%;
   height: 100vh;
   background-color: #f5f7fa;
+  position: relative;
+  overflow: hidden;
+}
+
+.particles-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 .carousel-container {
@@ -295,6 +317,9 @@ onUnmounted(() => {
   margin: 60px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-content {
@@ -338,7 +363,7 @@ onUnmounted(() => {
 }
 
 .dot.active {
-  background-color: rgb(104, 104, 104);
+  background-color: #1a1a1a;
   transform: scale(1.2);
 }
 
@@ -348,11 +373,18 @@ onUnmounted(() => {
   justify-content: center;
   align-items: center;
   padding: 0 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .login-form-content {
   width: 100%;
   max-width: 420px;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 40px;
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .login-title {
@@ -407,8 +439,8 @@ onUnmounted(() => {
   cursor: pointer;
   transition: color 0.3s ease;
   font-size: 20px;
-  font-weight: 700;
-  color: #787878;
+  font-weight: 600;
+  color: #1a1a1a;
   user-select: none;
   font-family: 'Noto Serif SC', serif;
 }
@@ -451,10 +483,11 @@ onUnmounted(() => {
   border: none;
   border-radius: 10px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: normal;
   cursor: pointer;
   transition: all 0.2s;
   margin-top: 16px;
+  font-family: 'Noto Sans SC', sans-serif;
 }
 
 .login-button:hover {
