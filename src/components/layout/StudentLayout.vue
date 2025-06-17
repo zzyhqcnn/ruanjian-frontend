@@ -5,7 +5,9 @@
       <div class="navbar-container">
         <!-- 左侧Logo -->
         <div class="logo">
-          <img src="@/assets/icons/LOGO-文字小.svg" alt="KnoQuest Logo" />
+          <router-link to="/">
+            <img src="@/assets/icons/LOGO-文字小.svg" alt="KnoQuest Logo" />
+          </router-link>
         </div>
 
         <!-- 导航链接 -->
@@ -49,7 +51,6 @@
             :class="{ active: isActive('/student/interaction') }"
             >师生互动</router-link
           >
-          <div class="nav-highlight" :style="highlightStyle" ref="navHighlightRef"></div>
         </nav>
 
         <!-- 右侧用户头像 -->
@@ -68,71 +69,25 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { ref, computed, onMounted, nextTick, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const route = useRoute()
 const navLinksRef = ref<HTMLElement | null>(null)
-const navHighlightRef = ref<HTMLElement | null>(null)
-const highlightStyle = ref({
-  display: 'block',
-  left: '0px',
-  width: '0px',
-  height: '2px',
-  bottom: '0px',
-  transition: 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
-})
 
 // 判断导航链接是否激活
 const isActive = (path: string) => {
+  // 特殊处理首页路径
+  if (path === '/student') {
+    // 首页路径只有在完全匹配时才激活
+    return route.path === '/student'
+  }
+  // 其他路径保持原来的判断逻辑
   return route.path === path || route.path.startsWith(path + '/')
 }
 
-// 设置活动链接的高亮
-const setActiveHighlight = () => {
-  if (!navLinksRef.value) return
-
-  // 找到当前活动链接
-  const activeLink = navLinksRef.value.querySelector('.nav-link.active')
-  if (!activeLink || !navHighlightRef.value) return
-
-  // 计算位置
-  const rect = activeLink.getBoundingClientRect()
-  const containerRect = navLinksRef.value.getBoundingClientRect()
-
-  // 计算目标位置
-  const targetLeft = rect.left - containerRect.left
-  const targetWidth = rect.width
-
-  console.log('设置滑块位置:', { targetLeft, targetWidth, el: activeLink })
-
-  // 设置高亮样式
-  highlightStyle.value = {
-    display: 'block',
-    left: `${targetLeft}px`,
-    width: `${targetWidth}px`,
-    height: '3px',
-    bottom: '-1px',
-    transition: 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
-  }
-}
-
-// 监听路由变化
-watch(
-  () => route.path,
-  () => {
-    nextTick(() => {
-      setActiveHighlight()
-    })
-  },
-)
-
 onMounted(() => {
-  // 初始化高亮位置
-  nextTick(() => {
-    setActiveHighlight()
-    // 监听窗口大小变化
-    window.addEventListener('resize', setActiveHighlight)
-  })
+  // 监听窗口大小变化
+  window.addEventListener('resize', () => {})
 })
 </script>
 
@@ -145,7 +100,6 @@ onMounted(() => {
 
 .navbar {
   background-color: #f5f7fa;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
   padding: 0.75rem 2rem;
   position: sticky;
   top: 0;
@@ -156,7 +110,6 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  /* max-width: 1440px; */
   margin: 0 auto;
   width: 100%;
 }
@@ -182,32 +135,33 @@ onMounted(() => {
 .nav-link {
   color: #1a1a1a;
   text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.5rem 0;
+  font-size: 25px;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
   position: relative;
-  transition: all 0.3s ease;
+  border-radius: 30px;
+  font-family: 'Noto Sans SC', sans-serif;
+  min-width: 4em;
+  text-align: center; /* 添加这行使内容居中 */
 }
 
 .nav-link:hover {
   color: #000000;
 }
 
-.nav-link.active {
-  font-weight: 600;
-}
-
-.nav-highlight {
-  position: absolute;
+/* .nav-link.active {
   background-color: #1a1a1a;
-  border-radius: 1px;
-  z-index: 1;
-  bottom: -1px;
-  height: 3px;
-  pointer-events: none;
-  transform-origin: center center;
-  will-change: transform, left, width;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  font-weight: 500;
+  min-width: 4em;
+} */
+
+.nav-link.active {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-weight: 500;
+  min-width: 4em;
+  text-align: center; /* 添加这行使内容居中 */
 }
 
 .user-avatar {
@@ -220,6 +174,7 @@ onMounted(() => {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #f5f7fa;
+  background-color: #1a1a1a;
 }
 
 .content-area {

@@ -8,8 +8,20 @@
       </div>
 
       <div class="actions">
-        <InteractiveHoverButton text="每日一题" class="action-button" />
-        <InteractiveHoverButton text="好文推荐" class="action-button" />
+        <InteractiveHoverButton
+          text="每日一题"
+          class="action-button"
+          color="#ffffff"
+          textColor="#1a1a1a"
+          backgroundColor="#1a1a1a"
+        />
+        <InteractiveHoverButton
+          text="好文推荐"
+          class="action-button"
+          color="#ffffff"
+          textColor="#1a1a1a"
+          backgroundColor="#1a1a1a"
+        />
       </div>
     </div>
   </div>
@@ -77,7 +89,7 @@ import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.
 }
 
 .quote {
-  font-size: 3rem;
+  font-size: min(4.3rem, 10vw);
   font-weight: bold;
   color: #1a1a1a;
   letter-spacing: 0.05em;
@@ -100,6 +112,10 @@ import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.
 
 .action-button {
   min-width: 160px;
+  /* border: 1px solid #575757; */
+  font-family: 'Noto Sans SC', sans-serif;
+  /* background-color: #1a1a1a; */
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {

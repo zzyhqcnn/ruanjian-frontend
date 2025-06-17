@@ -93,12 +93,12 @@ let animationFrameId: number | null = null
 const props = defineProps({
   simResolution: { type: Number, default: 128 },
   dyeResolution: { type: Number, default: 1024 },
-  densityDissipation: { type: Number, default: 6 }, // 更快消散
+  densityDissipation: { type: Number, default: 3 }, // 更快消散
   velocityDissipation: { type: Number, default: 2.0 },
   splatRadius: { type: Number, default: 0.3 }, // 更小面积
   splatForce: { type: Number, default: 4000 }, // 更小力度
   colorChangeSpeed: { type: Number, default: 0.01 }, // 更快变色
-  colorIntensity: { type: Number, default: 0.1 }, // 更低浓度
+  colorIntensity: { type: Number, default: 0.02 }, // 更低浓度
   curl: { type: Number, default: 0.2 },
   pressure: { type: Number, default: 0.1 },
   pressureIterations: { type: Number, default: 20 },
