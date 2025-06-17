@@ -30,8 +30,7 @@
 
         <!-- 学生端/教师端切换器 -->
         <div class="login-switcher-container">
-          <div class="login-switcher-track" ref="switcherTrack">
-            <div class="login-switcher-indicator" ref="switcherIndicator"></div>
+          <div class="login-switcher-track" ref="switcherTrackRef">
             <div
               class="login-switcher-option"
               :class="{ active: activeTab === '学生端' }"
@@ -46,6 +45,7 @@
             >
               教师端
             </div>
+            <div class="tab-highlight" :style="highlightStyle" ref="tabHighlightRef"></div>
           </div>
         </div>
 
@@ -69,16 +69,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import anime from 'animejs/lib/anime.es.js'
+import { animate, createTimeline, createTimer } from 'animejs'
 
 const router = useRouter()
 const email = ref('')
 const password = ref('')
 const activeTab = ref('学生端')
-const switcherTrack = ref<HTMLElement | null>(null)
-const switcherIndicator = ref<HTMLElement | null>(null)
+const switcherTrackRef = ref<HTMLElement | null>(null)
+const tabHighlightRef = ref<HTMLElement | null>(null)
+const highlightStyle = ref({
+  display: 'none',
+  left: '0px',
+  width: '0px',
+  height: '0px',
+  top: '0px',
+  transition: 'all 0.6s cubic-bezier(0.25, 1, 0.5, 1.4)',
+})
 
 const carouselImages = [
   {
@@ -111,26 +119,122 @@ const startCarousel = () => {
 const switchTab = (tab: string) => {
   if (activeTab.value !== tab) {
     activeTab.value = tab
+
+    // 切换后更新高亮位置
+    nextTick(() => {
+      // 使用anime.js增强动画效果
+      const activeTabElement = switcherTrackRef.value?.querySelector(
+        '.login-switcher-option.active',
+      )
+      if (!activeTabElement || !tabHighlightRef.value || !switcherTrackRef.value) return
+
+      const rect = activeTabElement.getBoundingClientRect()
+      const containerRect = switcherTrackRef.value.getBoundingClientRect()
+
+      // 计算目标位置，严格确保不超出容器边界
+      const targetLeft = Math.max(
+        0,
+        Math.min(rect.left - containerRect.left, containerRect.width - rect.width),
+      )
+      const targetTop = Math.max(
+        0,
+        Math.min(rect.top - containerRect.top, containerRect.height - rect.height),
+      )
+
+      // 添加安全边距，确保高亮块完全在容器内
+      const safeTargetLeft = Math.min(targetLeft, containerRect.width - rect.width)
+      const safeTargetTop = Math.min(targetTop, containerRect.height - rect.height)
+
+      // 检测是否触及边界 - 使用更精确的边界检测
+      const isTouchingLeftEdge = safeTargetLeft <= 2
+      const isTouchingRightEdge = safeTargetLeft + rect.width >= containerRect.width - 2
+
+      // 创建动画计时器
+      const timer = createTimer()
+
+      // 主移动动画 - 使用安全坐标
+      animate(timer, {
+        targets: '.tab-highlight',
+        left: safeTargetLeft + 'px',
+        top: safeTargetTop + 'px',
+        width: rect.width + 'px',
+        height: rect.height + 'px',
+        duration: 550,
+        easing: 'cubicBezier(.25, .6, .25, 1)',
+        complete: function () {
+          // 如果触及边界，添加挤压动画
+          if (isTouchingLeftEdge || isTouchingRightEdge) {
+            // 创建新的计时器用于挤压动画
+            const squeezeTimer = createTimer()
+
+            // 执行挤压动画序列
+            animate(squeezeTimer, {
+              targets: '.tab-highlight',
+              // 水平缩放动画序列 - 更平滑的弹性效果
+              scaleX: [
+                { value: isTouchingLeftEdge ? 0.92 : 0.92, duration: 100 }, // 初始压缩
+                { value: isTouchingLeftEdge ? 1.04 : 1.04, duration: 100 }, // 反弹
+                { value: 1, duration: 150 }, // 恢复正常
+              ],
+              // 水平位移动画序列 - 确保不会超出边界的轻微位移
+              translateX: [
+                { value: isTouchingLeftEdge ? '1.5px' : '-1.5px', duration: 100 },
+                { value: isTouchingLeftEdge ? '-0.8px' : '0.8px', duration: 100 },
+                { value: '0px', duration: 150 },
+              ],
+              // 使用更精确的弹性曲线，确保不会弹出容器边界
+              easing: 'easeOutElastic(1, 0.35)',
+              duration: 350,
+            })
+          }
+        },
+      })
+    })
   }
 }
 
-// 动画效果：移动指示器
-const animateIndicator = () => {
-  if (!switcherIndicator.value) return
+// 设置活动标签的高亮
+const setActiveHighlight = () => {
+  if (!switcherTrackRef.value) return
 
-  const targetX = activeTab.value === '学生端' ? '0' : '50%'
+  // 找到当前活动标签
+  const activeTab = switcherTrackRef.value.querySelector('.login-switcher-option.active')
+  if (!activeTab) return
 
-  anime({
-    targets: switcherIndicator.value,
-    translateX: targetX,
-    duration: 600,
-    easing: 'easeInOutQuad',
-  })
+  // 计算位置
+  const rect = activeTab.getBoundingClientRect()
+  const containerRect = switcherTrackRef.value.getBoundingClientRect()
+
+  // 严格确保不超出容器边界
+  const targetLeft = Math.max(
+    0,
+    Math.min(rect.left - containerRect.left, containerRect.width - rect.width),
+  )
+  const targetTop = Math.max(
+    0,
+    Math.min(rect.top - containerRect.top, containerRect.height - rect.height),
+  )
+
+  // 添加安全边距，确保高亮块完全在容器内
+  const safeTargetLeft = Math.min(targetLeft, containerRect.width - rect.width)
+  const safeTargetTop = Math.min(targetTop, containerRect.height - rect.height)
+
+  // 设置高亮样式，使用更平滑的过渡曲线
+  highlightStyle.value = {
+    display: 'block',
+    left: `${safeTargetLeft}px`,
+    top: `${safeTargetTop}px`,
+    width: `${rect.width}px`,
+    height: `${rect.height}px`,
+    transition: 'all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)',
+  }
 }
 
-// 监听 activeTab 变化，触发动画
+// 监听 activeTab 变化
 watch(activeTab, () => {
-  animateIndicator()
+  nextTick(() => {
+    setActiveHighlight()
+  })
 })
 
 const handleLogin = () => {
@@ -152,14 +256,23 @@ const handleLogin = () => {
 
 onMounted(() => {
   startCarousel()
-  // 初始化指示器位置
-  animateIndicator()
+
+  // 初始化高亮位置
+  nextTick(() => {
+    setActiveHighlight()
+
+    // 监听窗口大小变化，更新高亮位置
+    window.addEventListener('resize', setActiveHighlight)
+  })
 })
 
 onUnmounted(() => {
   if (carouselInterval) {
     clearInterval(carouselInterval)
   }
+
+  // 移除事件监听
+  window.removeEventListener('resize', setActiveHighlight)
 })
 </script>
 
@@ -179,7 +292,7 @@ onUnmounted(() => {
   align-items: center;
   background-color: #dadceb;
   border-radius: 24px;
-  margin: 24px;
+  margin: 60px;
   position: relative;
   overflow: hidden;
 }
@@ -219,7 +332,7 @@ onUnmounted(() => {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -243,8 +356,8 @@ onUnmounted(() => {
 }
 
 .login-title {
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 45px;
+  font-weight: bolder;
   color: #1a1a1a;
   margin-bottom: 40px;
   text-align: center;
@@ -262,25 +375,25 @@ onUnmounted(() => {
   position: relative;
   width: 100%;
   height: 60px;
-  background-color: #f0f0f0;
+  background-color: #f0f6ff;
   border-radius: 30px;
   display: flex;
   align-items: center;
   padding: 4px;
-  overflow: hidden;
-  border: 1px solid #e6e6e6;
+  overflow: hidden; /* 确保子元素不超出边界 */
+  /* border: 1px solid #e6e6e6; */
 }
 
-.login-switcher-indicator {
+.tab-highlight {
   position: absolute;
-  width: 50%;
-  height: 50px;
   background-color: white;
   border-radius: 25px;
-  top: 5px;
-  left: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform-origin: center center;
+  will-change: transform, left, top, width, height; /* 优化性能 */
+  backface-visibility: hidden; /* 防止3D变换闪烁 */
 }
 
 .login-switcher-option {
@@ -293,10 +406,11 @@ onUnmounted(() => {
   justify-content: center;
   cursor: pointer;
   transition: color 0.3s ease;
-  font-size: 18px;
-  font-weight: 500;
-  color: #666;
+  font-size: 20px;
+  font-weight: 700;
+  color: #787878;
   user-select: none;
+  font-family: 'Noto Serif SC', serif;
 }
 
 .login-switcher-option.active {
@@ -315,7 +429,7 @@ onUnmounted(() => {
 .form-input {
   width: 100%;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 35px;
   border: 1px solid #d9d9da;
   padding: 0 16px;
   font-size: 16px;
