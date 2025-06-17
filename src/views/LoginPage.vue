@@ -80,7 +80,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { animate, createTimeline, createTimer } from 'animejs'
+import anime from 'animejs'
 import ParticlesBg from '@/components/ParticlesBg.vue'
 
 const router = useRouter()
@@ -159,11 +159,8 @@ const switchTab = (tab: string) => {
       const isTouchingLeftEdge = safeTargetLeft <= 2
       const isTouchingRightEdge = safeTargetLeft + rect.width >= containerRect.width - 2
 
-      // 创建动画计时器
-      const timer = createTimer()
-
       // 主移动动画 - 使用安全坐标
-      animate(timer, {
+      anime({
         targets: '.tab-highlight',
         left: safeTargetLeft + 'px',
         top: safeTargetTop + 'px',
@@ -174,11 +171,8 @@ const switchTab = (tab: string) => {
         complete: function () {
           // 如果触及边界，添加挤压动画
           if (isTouchingLeftEdge || isTouchingRightEdge) {
-            // 创建新的计时器用于挤压动画
-            const squeezeTimer = createTimer()
-
             // 执行挤压动画序列
-            animate(squeezeTimer, {
+            anime({
               targets: '.tab-highlight',
               // 水平缩放动画序列 - 更平滑的弹性效果
               scaleX: [

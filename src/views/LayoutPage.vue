@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import AuroraBackground from '@/components/AuroraBackground.vue'
+import SplashCursor from '@/components/SplashCursor.vue'
 </script>
 
 <style scoped>

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { h } from 'vue'
+import TempRoute from '@/views/TempRoute.vue'
 
 const routes = [
   {
@@ -13,16 +15,12 @@ const routes = [
       {
         path: 'intro',
         name: 'Intro',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">介绍页面</div>',
-        },
+        component: () => h(TempRoute, { title: '介绍页面' }),
       },
       {
         path: 'about',
         name: 'About',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">关于页面</div>',
-        },
+        component: () => h(TempRoute, { title: '关于页面' }),
       },
     ],
   },
@@ -34,9 +32,7 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: {
-      template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">注册页面</div>',
-    },
+    component: () => h(TempRoute, { title: '注册页面' }),
   },
   {
     path: '/student',
@@ -50,23 +46,17 @@ const routes = [
       {
         path: 'test',
         name: 'StudentTest',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">综合测试</div>',
-        },
+        component: () => h(TempRoute, { title: '综合测试' }),
       },
       {
         path: 'analysis',
         name: 'StudentAnalysis',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">习题分析</div>',
-        },
+        component: () => h(TempRoute, { title: '习题分析' }),
       },
       {
         path: 'resources',
         name: 'StudentResources',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">学习资源</div>',
-        },
+        component: () => h(TempRoute, { title: '学习资源' }),
       },
       {
         path: 'bookshelf',

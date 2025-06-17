@@ -33,9 +33,9 @@ import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.
 
 .background-text {
   position: absolute;
-  font-size: 30vw;
+  font-size: 10vw;
   font-weight: 900;
-  color: rgba(240, 240, 245, 0.6);
+  color: #bec3de;
   z-index: 0;
   user-select: none;
   top: 50%;
@@ -43,6 +43,19 @@ import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.
   transform: translate(-50%, -50%);
   white-space: nowrap;
   font-family: 'Noto Serif SC', serif;
+  /* font-family: 'ZCOOL XiaoWei', serif; */
+}
+
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 
 .content {
@@ -50,18 +63,16 @@ import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 100%;
   text-align: center;
-  position: relative;
   z-index: 1;
+  gap: 8rem;
 }
 
 .quote-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 4rem;
   width: 100%;
 }
 
@@ -81,6 +92,10 @@ import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.
   gap: 2rem;
   justify-content: center;
   margin-top: 2rem;
+  position: absolute;
+  bottom: 27%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .action-button {

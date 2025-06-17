@@ -31,6 +31,7 @@
 
 <script setup lang="ts">
 import RainbowButton from '@/components/buttons/RainbowButton.vue'
+
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -108,9 +109,16 @@ const navigateToLogin = () => {
   margin-top: 30px;
 }
 .btn-light {
-  background: #fff;
+  /* background: #fff;
   color: #1a1a1a;
-  font-weight: 400;
+  font-weight: 400; */
+
+  background: rgba(255, 255, 255, 0.2); /* 半透明白色背景 */
+  border-radius: 10px; /* 圆角边框 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 简单的阴影效果 */
+  backdrop-filter: blur(10px); /* 模糊效果 */
+  -webkit-backdrop-filter: blur(10px); /* 针对 Safari 浏览器的兼容性 */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 边框 */
 }
 .btn-dark {
   background: #1a1a1a;
