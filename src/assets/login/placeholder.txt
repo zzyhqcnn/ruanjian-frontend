@@ -1,0 +1,2 @@
+这是登录页面轮播图片存放的目录
+请将轮播图片放到这里，命名为slide1.jpg、slide2.jpg、slide3.jpg、slide4.jpg 

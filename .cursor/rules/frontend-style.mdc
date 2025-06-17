@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 前端视觉风格规范
+
+**1. 色彩体系**  
+- **主背景**：`#F5F7FA`（柔光浅灰）  
+- **核心文本色**：  
+  - 主体文字：`#1A1A1A`（深炭黑）  
+  - 反白文字：`#FFFFFF`（纯白）  
+- **按钮系统**：  
+  - 深色按钮：背景 `#1A1A1A` / 文字 `#FFFFFF`  
+  - 浅色按钮：背景 `#FFFFFF` / 文字 `#1A1A1A`  
+- **描边/分割线**：`#D9D9DA`（浅灰）  
+
+**2. 字体规范**  
+- **优先层级**：  
+  ```css
+  font-family: "Noto Sans SC", "Noto Serif SC", "Sarasa UI SC", system-ui, sans-serif;
+  ```
+  - 中文字体：Noto Sans（无衬线） > Noto Serif（衬线） > Sarasa UI（等宽优化）
+  - 西文字体：优先使用系统默认无衬线字体  
+
+**3. 设计原则**  
+- **核心风格**：现代简约（Minimalism）  
+- **关键特征**：
+  - 大面积留白与呼吸感布局
+  - 无冗余装饰元素
+  - 极简色彩系统（主色 + 黑白灰）
+  - 清晰的信息层级关系
