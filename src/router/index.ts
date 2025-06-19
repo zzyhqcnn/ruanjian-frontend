@@ -61,9 +61,7 @@ const routes = [
       {
         path: 'bookshelf',
         name: 'StudentBookshelf',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">书架</div>',
-        },
+        component: () => import('@/views/student/StudentBookshelfPage.vue'),
       },
       {
         path: 'ai-chat',

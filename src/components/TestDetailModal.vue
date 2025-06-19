@@ -75,6 +75,7 @@
               </div>
               <div class="rating-bar-item">
                 <div class="stars-count">
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
@@ -86,6 +87,8 @@
               </div>
               <div class="rating-bar-item">
                 <div class="stars-count">
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
@@ -96,6 +99,9 @@
               </div>
               <div class="rating-bar-item">
                 <div class="stars-count">
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                 </div>
@@ -105,6 +111,10 @@
               </div>
               <div class="rating-bar-item">
                 <div class="stars-count">
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
                   <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                 </div>
                 <div class="bar-container">
@@ -132,26 +142,85 @@
         </div>
 
         <div class="comments-section">
-          <h2>评论区</h2>
           <div class="comments">
             <div class="comment">
               <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
               <div class="comment-content">
-                <div class="comment-name">老人小孩都爱吃</div>
                 <div class="comment-text">非常好的题目，收获很多</div>
               </div>
             </div>
             <div class="comment">
               <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
               <div class="comment-content">
-                <div class="comment-name">很好的题目</div>
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
+                <div class="comment-text">收获很多，讲解也很清晰</div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
+              <div class="comment-content">
                 <div class="comment-text">收获很多，讲解也很清晰</div>
               </div>
             </div>
             <div class="comment">
               <img src="@/assets/avatar.png" alt="User" class="comment-avatar" />
               <div class="comment-content">
-                <div class="comment-name">老人小孩都爱吃</div>
                 <div class="comment-text">非常好的题目，收获很多</div>
               </div>
             </div>
@@ -229,11 +298,11 @@ onBeforeUnmount(() => {
 
 .detail-modal {
   width: 80%;
-  max-width: 1200px;
-  height: 80vh;
+  /* max-width: 1200px; */
+  height: 93vh;
   background-color: white;
   border-radius: 20px;
-  padding: 2rem;
+  padding: 0rem 2.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   position: relative;
@@ -243,8 +312,13 @@ onBeforeUnmount(() => {
 .mac-buttons {
   display: flex;
   gap: 8px;
-  margin-bottom: 1.5rem;
-  margin-left: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: -10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-top: 10px;
 }
 
 .mac-button {
@@ -269,7 +343,7 @@ onBeforeUnmount(() => {
   font-family: 'Noto Sans SC', sans-serif;
   font-size: 28px;
   font-weight: 600;
-  margin-top: 1.5rem;
+  /* margin-top: 1rem; */
   margin-bottom: 0.5rem;
 }
 
@@ -322,7 +396,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 600;
 }
@@ -336,30 +410,46 @@ onBeforeUnmount(() => {
 
 .detail-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 450px 1fr;
+  grid-template-areas:
+    'rating comments'
+    'wordcloud comments';
+  gap: 1rem 1rem;
+  width: 100%;
+  height: 100px;
+  min-height: fit-content;
 }
 
 .rating-section {
-  height: 200px;
+  height: 170px;
+  width: 450px;
   background-color: #f9f9f9;
   border-radius: 12px;
-  padding: 20px;
+  padding: 10px 30px 10px 30px;
+  grid-area: rating;
 }
 
-.word-cloud,
+/* .word-cloud, */
 .comments-section {
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 25px;
+  /* padding: 1.5rem; */
+  grid-area: comments;
+  height: 100%;
+  /* min-height: 450px; */
+}
+
+.word-cloud {
+  grid-area: wordcloud;
+  height: 170px;
 }
 
 .rating-section h2,
 .comments-section h2 {
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 600;
-  font-size: 30px;
-  margin-bottom: 1rem;
+  font-size: 25px;
+  margin-bottom: 0.5rem;
 }
 
 .rating-overview {
@@ -391,7 +481,7 @@ onBeforeUnmount(() => {
 
 .rating-bars {
   flex: 1;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 /* .rating-bar-item {
@@ -411,7 +501,8 @@ onBeforeUnmount(() => {
 .rating-bar-item {
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1px;
+  width: 250px;
 }
 
 .stars-count {
@@ -419,18 +510,26 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 2px;
   margin-left: auto; /* 关键：将星星推到右侧 */
-  margin-right: 10px; /* 保留原有的右侧间距 */
+  margin-right: 5px; /* 保留原有的右侧间距 */
 }
 
 .stars-count img {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
+}
+
+/* 不需要显示的星星设为透明 */
+.stars-count img.transparent {
+  opacity: 0;
+  visibility: hidden;
+  /* width: 0; */
+  margin-left: 0;
 }
 
 .bar-container {
   flex: 1;
   background-color: #e0e0e0;
-  height: 10px;
+  height: 7px;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -441,21 +540,19 @@ onBeforeUnmount(() => {
   border-radius: 5px;
 }
 
-.word-cloud {
-  grid-column: 1 / -1;
-}
-
 .word-cloud-bg {
   background-color: #000;
   color: #fff;
-  padding: 2rem;
+  padding: 1.5rem;
+  width: 100%;
   border-radius: 10px;
-  min-height: 200px;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
+  overflow: hidden;
 }
 
 .word {
@@ -483,7 +580,9 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: 200px;
+  height: 50vh;
+  /* max-height: 200px; */
+  /* border-radius: 25px; */
   overflow-y: auto;
 }
 
@@ -503,7 +602,19 @@ onBeforeUnmount(() => {
   margin-bottom: 0.25rem;
 }
 
+.comment-content {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 10px 15px;
+  width: 70%;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
 .comment-text {
   color: #333;
+  margin: 0;
 }
 </style>

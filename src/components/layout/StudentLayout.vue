@@ -54,6 +54,7 @@
           <!-- 添加滑动指示器 -->
           <div class="nav-indicator" ref="navIndicatorRef">
             <SnowfallBg color="#FFFFFF" :speed="0.1" :quantity="30" />
+            <!-- <ParticlesBg color="#FFFFFF" :quantity="30" /> -->
           </div>
         </nav>
 
@@ -76,6 +77,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted, watch, nextTick } from 'vue'
 import { animate } from '@/animejs/lib/anime.esm.js'
 import SnowfallBg from '../SnowfallBg.vue'
+import ParticlesBg from '../ParticlesBg.vue'
 
 const route = useRoute()
 const router = useRouter()

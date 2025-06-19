@@ -1,5 +1,19 @@
 <template>
-  <div class="student-home">
+  <div
+    class="student-home"
+    v-motion
+    :initial="{ opacity: 0, y: 40, filter: 'blur(10px)' }"
+    :enter="{
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        delay: 300,
+        duration: 800,
+        ease: 'easeInOut',
+      },
+    }"
+  >
     <!-- <ParticlesBg
       class="particles-background"
       :quantity="250"
@@ -66,7 +80,7 @@ import SnowfallBg from '@/components/SnowfallBg.vue'
   position: absolute;
   font-size: 10vw;
   font-weight: 900;
-  color: #bec3de;
+  color: #bec3dec5;
   z-index: 0;
   user-select: none;
   top: 50%;
