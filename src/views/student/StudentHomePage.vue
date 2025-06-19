@@ -1,5 +1,22 @@
 <template>
   <div class="student-home">
+    <!-- <ParticlesBg
+      class="particles-background"
+      :quantity="250"
+      :ease="60"
+      :color="'#787878'"
+      :staticity="20"
+    /> -->
+
+    <SnowfallBg
+      color="1a1a1a"
+      class="particles-background"
+      :min-radius="0.2"
+      :max-radius="2"
+      :speed="0.3"
+      :quantity="100"
+    />
+
     <div class="background-text">苏轼</div>
 
     <div class="content">
@@ -29,6 +46,8 @@
 
 <script setup lang="ts">
 import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.vue'
+import ParticlesBg from '@/components/ParticlesBg.vue'
+import SnowfallBg from '@/components/SnowfallBg.vue'
 </script>
 
 <style scoped>
@@ -68,6 +87,12 @@ import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.
   justify-content: center;
   align-items: center;
   z-index: 1;
+}
+
+.particles-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 .content {

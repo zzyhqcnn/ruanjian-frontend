@@ -17,15 +17,15 @@
 </template>
 
 <script setup lang="ts">
-import RainbowButton from '@/components/buttons/RainbowButton.vue';
+import RainbowButton from '@/components/buttons/RainbowButton.vue'
 </script>
 
 <style scoped>
 .layout-root {
   display: flex;
   min-height: 100vh;
-  background: #F5F7FA;
-  font-family: "Noto Sans SC", "Noto Serif SC", "Sarasa UI SC", system-ui, sans-serif;
+  background: #f5f7fa;
+  font-family: 'Noto Sans SC', 'Noto Serif SC', 'Sarasa UI SC', system-ui, sans-serif;
 }
 .sidebar {
   width: 180px;
@@ -51,9 +51,9 @@ import RainbowButton from '@/components/buttons/RainbowButton.vue';
   width: 100%;
 }
 .nav-item {
-  font-family: "Noto Serif SC", serif;
+  font-family: 'Noto Serif SC', serif;
   font-size: 22px;
-  color: #1A1A1A;
+  color: #1a1a1a;
   text-decoration: none;
   transition: color 0.2s;
   text-align: center;
@@ -70,4 +70,4 @@ import RainbowButton from '@/components/buttons/RainbowButton.vue';
   min-height: 100vh;
   position: relative;
 }
-</style> 
+</style>

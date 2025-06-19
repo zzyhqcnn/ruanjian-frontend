@@ -43,7 +43,7 @@ import SplashCursor from '@/components/SplashCursor.vue'
   display: flex;
   flex-direction: column;
   padding: 0;
-  position: relative;
+  position: absolute;
   backdrop-filter: blur(5px);
   background-color: rgba(255, 255, 255, 0.1);
 }

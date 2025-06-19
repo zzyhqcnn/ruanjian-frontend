@@ -51,6 +51,10 @@
             :class="{ active: isActive('/student/interaction') }"
             >师生互动</router-link
           >
+          <!-- 添加滑动指示器 -->
+          <div class="nav-indicator" ref="navIndicatorRef">
+            <SnowfallBg color="#FFFFFF" :speed="0.1" :quantity="30" />
+          </div>
         </nav>
 
         <!-- 右侧用户头像 -->
@@ -68,11 +72,16 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ref, onMounted, watch, nextTick } from 'vue'
+import { animate } from '@/animejs/lib/anime.esm.js'
+import SnowfallBg from '../SnowfallBg.vue'
 
 const route = useRoute()
+const router = useRouter()
 const navLinksRef = ref<HTMLElement | null>(null)
+const navIndicatorRef = ref<HTMLElement | null>(null)
+const activeLink = ref<HTMLElement | null>(null)
 
 // 判断导航链接是否激活
 const isActive = (path: string) => {
@@ -85,9 +94,84 @@ const isActive = (path: string) => {
   return route.path === path || route.path.startsWith(path + '/')
 }
 
+// 更新导航指示器位置
+const updateIndicator = (initial = false) => {
+  if (!navLinksRef.value || !navIndicatorRef.value) return
+
+  // 获取当前激活的链接元素
+  const activeElement = navLinksRef.value.querySelector('.nav-link.active') as HTMLElement
+  if (!activeElement) return
+
+  // 获取所有链接元素
+  const allLinks = Array.from(navLinksRef.value.querySelectorAll('.nav-link')) as HTMLElement[]
+
+  // 如果是初始化，直接设置位置，不进行动画
+  if (initial) {
+    const { width, left } = activeElement.getBoundingClientRect()
+    const navLeft = navLinksRef.value.getBoundingClientRect().left
+
+    navIndicatorRef.value.style.width = `${width}px`
+    navIndicatorRef.value.style.left = `${left - navLeft}px`
+    navIndicatorRef.value.style.opacity = '1'
+
+    // 设置激活链接的颜色
+    activeElement.style.color = '#ffffff'
+
+    return
+  }
+
+  // 计算新位置并动画
+  const { width, left } = activeElement.getBoundingClientRect()
+  const navLeft = navLinksRef.value.getBoundingClientRect().left
+
+  // 重置所有链接颜色（除了当前激活的）
+  allLinks.forEach((link) => {
+    if (link !== activeElement) {
+      // 强制设置非活动链接为原始颜色
+      link.style.color = '#1a1a1a'
+    }
+  })
+
+  // 使用anime.js进行动画，应用慢-快-慢的动画曲线
+  animate(navIndicatorRef.value, {
+    left: `${left - navLeft}px`,
+    width: `${width}px`,
+    duration: 600,
+    easing: 'cubic-bezier(0,1,0,1)', // 慢-快-慢的曲线
+    complete: () => {
+      activeLink.value = activeElement
+    },
+  })
+
+  // 同步为文字添加动画，使颜色变化与滑块同步
+  animate(activeElement, {
+    color: '#ffffff',
+    duration: 600,
+    easing: 'cubic-bezier(0,1,0,1)', // 使用相同的缓动函数
+    delay: 100, // 稍微延迟颜色变化，确保滑块先移动
+  })
+}
+
+// 监听路由变化
+watch(
+  () => route.path,
+  async () => {
+    // 等待DOM更新后再执行动画
+    await nextTick()
+    updateIndicator()
+  },
+)
+
 onMounted(() => {
+  // 初始化滑块位置
+  nextTick(() => {
+    updateIndicator(true)
+  })
+
   // 监听窗口大小变化
-  window.addEventListener('resize', () => {})
+  window.addEventListener('resize', () => {
+    updateIndicator()
+  })
 })
 </script>
 
@@ -135,33 +219,43 @@ onMounted(() => {
 .nav-link {
   color: #1a1a1a;
   text-decoration: none;
-  font-size: 25px;
-  font-weight: 400;
+  font-size: 21px;
+  font-weight: bold;
   padding: 0.5rem 1rem;
   position: relative;
   border-radius: 30px;
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Noto Serif SC', serif;
   min-width: 4em;
-  text-align: center; /* 添加这行使内容居中 */
+  text-align: center;
+  transition: color 0.3s ease;
 }
 
 .nav-link:hover {
   color: #000000;
 }
 
-/* .nav-link.active {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  font-weight: 500;
-  min-width: 4em;
-} */
-
+/* 修改active样式，让动画控制颜色变化 */
 .nav-link.active {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  font-weight: 500;
+  font-weight: 600;
   min-width: 4em;
-  text-align: center; /* 添加这行使内容居中 */
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* 添加导航指示器样式 */
+.nav-indicator {
+  position: absolute;
+  height: 100%;
+  background-color: #1a1a1a;
+  border-radius: 30px;
+  z-index: 1;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  /* 新增以下属性，确保内容超出时不显示 */
+  overflow: hidden; /* 裁剪超出部分 */
 }
 
 .user-avatar {
@@ -179,9 +273,9 @@ onMounted(() => {
 
 .content-area {
   flex: 1;
-  padding: 2rem;
-  margin: 0 auto;
+  margin: 0;
   width: 100%;
   background-color: #f5f7fa;
+  overflow: hidden; /* 禁止滚动 */
 }
 </style>

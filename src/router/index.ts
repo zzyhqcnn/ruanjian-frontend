@@ -46,7 +46,7 @@ const routes = [
       {
         path: 'test',
         name: 'StudentTest',
-        component: () => h(TempRoute, { title: '综合测试' }),
+        component: () => import('@/views/student/StudentTestPage.vue'),
       },
       {
         path: 'analysis',
