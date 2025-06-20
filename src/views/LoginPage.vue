@@ -32,6 +32,8 @@
       </div>
     </div>
 
+    <input type="text" style="position: absolute; top: -9999px; left: -99999px" />
+    <input type="password" style="position: absolute; top: -9999px; left: -99999px" />
     <!-- 右侧登录表单区域 -->
     <div class="login-form-container">
       <div class="login-form-content">
@@ -407,7 +409,7 @@ onUnmounted(() => {
   position: relative;
   width: 100%;
   height: 60px;
-  background-color: #f0f6ff;
+  background-color: #f5f9fe;
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -481,7 +483,7 @@ onUnmounted(() => {
   background-color: #1a1a1a;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 30px;
   font-size: 18px;
   font-weight: normal;
   cursor: pointer;

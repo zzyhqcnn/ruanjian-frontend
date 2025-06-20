@@ -1,0 +1,755 @@
+{
+  "nodes": [
+    "Bilen_Dynamic_Image_Networks_CVPR_2016_paper.pdf",
+    "平均图模型",
+    "d2l-zh-pytorch.pdf",
+    "torch.ones",
+    "cp08-样章示例-TensorFlow Lite",
+    "TFLite模型",
+    "《鸟哥的Linux私房菜》",
+    "RAID-0",
+    "DCNN based human activity recognition framework with depth vision guiding.pdf",
+    "人工智能",
+    "Deep learning for sensor-based human activity recognition Overview, challenges, and opportunities.pdf",
+    "summarization",
+    "1-s2",
+    "Kubernetes",
+    "1-s2",
+    "Kubernetes",
+    "1-s2",
+    "Kubernetes",
+    "2312",
+    "optimization",
+    "2411",
+    "operator",
+    "3D Ball Localization From A Single Calibrated Image_zh",
+    "TensorFlow",
+    "3D_Convolutional_Neural_Networks_for_Human_Action_Recognition",
+    "classifier",
+    "923-Article Text-1720-2-10-20220519",
+    "motion recognition",
+    "A survey on deep learning-based real-time crowd anomaly detection",
+    "机器学习算法",
+    "Deep learning in computer vision principles and applications (Mahmoud Hassaballah, Ali Ismail Awad) (Z-Library).pdf",
+    "automated mapping",
+    "Action recognition using optimized deep autoencoder and CNN for",
+    "classifier",
+    "Ball tracking and trajectory prediction system for tennis robots",
+    "model",
+    "Bilen_Dynamic_Image_Networks_CVPR_2016_paper",
+    "operator",
+    "Estimation of Camera Pose, Nonlinear.pdf",
+    "quaternions",
+    "Fast R-CNN.pdf",
+    "max-pooling",
+    "Faster R-CNN.pdf",
+    "深度神经网络",
+    "Human segmentation in surveillance video with deep learning.pdf",
+    "人工智能",
+    "Human_Action_Recognition_From_Various_Data_Modalities_A_Review.pdf",
+    "motion patterns",
+    "IJCS_48_4_02.pdf",
+    "人工智能",
+    "Intelligent Video Analytics for Human Action Recognition The State of Knowledge.pdf",
+    "人工智能",
+    "International Journal of Intelligent Systems - 2024 - Dastbaravardeh - Channel Attention‐Based Approach with Autoencoder.pdf",
+    "人工智能",
+    "LLM-v1.0.0.pdf",
+    "bash",
+    "Mask R-CNN.pdf",
+    "深度神经网络",
+    "OpenPose Realtime Multi-Person 2D PoseEstimation using Part Affinity Fields.pdf",
+    "人脸识别",
+    "Pedestrian attribute recognition A survey.pdf",
+    "人工智能",
+    "Pose2Trajectory 使用 Transformers 基于身体姿势预测网球运动员的轨迹.pdf",
+    "人工智能",
+    "R-CNN.pdf",
+    "深度神经网络",
+    "RetinaNet.pdf",
+    "CNN",
+    "s11263-022-01594-9.pdf",
+    "人工智能",
+    "sensors-19-01005.pdf",
+    "人工智能",
+    "SkateFormer Skeletal-Temporal Transformer for Human Action Recognition.pdf",
+    "learning",
+    "SlowFast Networks for Video Recognition.pdf",
+    "深度卷积神经网络",
+    "SSD.pdf",
+    "data augmentation",
+    "STNet羽毛球运动小目标定位跟踪网络.pdf",
+    "learning",
+    "Toward human activity recognition a survey.pdf",
+    "Dense trajectories",
+    "TrackNet A Deep Learning Network for TrackingHigh-speed and Tiny Objects in Sports Applications.pdf",
+    "人工智能",
+    "TrackNetV2 Efficient Shuttlecock TrackingNetwork.pdf",
+    "人工智能",
+    "TrackNetV3.pdf",
+    "data augmentation",
+    "TrackNetV4 Enhancing Fast Sports Object.pdf",
+    "max-pooling",
+    "YO-CSA-T A Real-time Badminton Tracking System Utilizing YOLOBased on Contextual and Spatial Attention.pdf",
+    "ImageNet",
+    "YOLOv1.pdf",
+    "人工智能",
+    "YOLOv2.pdf",
+    "深度神经网络",
+    "YOLOv3.pdf",
+    "深度神经网络",
+    "YOLOv4.pdf",
+    "max-pooling",
+    "YOLOv5.pdf",
+    "ReLU层",
+    "YOLOv5s-Megvii.pdf",
+    "ImageNet",
+    "YOLOv6.pdf",
+    "Tensor",
+    "YOLOv7.pdf",
+    "LSTM",
+    "中国计算机学会推荐国际学术会议和期刊目录-2022.pdf",
+    "人工智能",
+    "周志华-机器学习.pdf",
+    "learning",
+    "additional-responses.md",
+    "HTTPvalidationError",
+    "additional-status-codes.md",
+    "OpenAPI",
+    "advanced-dependencies.md",
+    "__call__",
+    "async.md",
+    "机器学习",
+    "background-tasks.md",
+    "异步IO",
+    "behind-a-proxy.md",
+    "FastAPI",
+    "bigger-applications.md",
+    "users",
+    "body-fields.md",
+    "Field",
+    "cloud.md",
+    "FastAPI",
+    "concepts.md",
+    "Kubernetes",
+    "cors.md",
+    "expose_headers",
+    "custom-response.md",
+    "fastapi",
+    "docker.md",
+    "Kubernetes",
+    "encoder.md",
+    "JSON",
+    "environment-variables.md",
+    "Python环境变量",
+    "events.md",
+    "Python",
+    "extra-models.md",
+    "email",
+    "fastapi-cli.md",
+    "FastAPI",
+    "features.md",
+    "OpenAPI",
+    "first-steps.md",
+    "FastAPI",
+    "general.md",
+    "OpenAPI",
+    "generate-clients.md",
+    "FastAPI",
+    "handling-errors.md",
+    "FastAPI",
+    "header-param-models.md",
+    "FastAPI",
+    "http-basic-auth.md",
+    "compare_digest",
+    "https.md",
+    "DNS服务器",
+    "metadata.md",
+    "自动化部署",
+    "oauth2-scopes.md",
+    "FastAPI",
+    "openapi-callbacks.md",
+    "Uvicorn",
+    "path-params.md",
+    "OpenAPI",
+    "Python修炼之道.pdf",
+    "bash",
+    "query-params-str-validations.md",
+    "S3存储服务",
+    "request-files.md",
+    "python-multipart",
+    "request-forms-and-files.md",
+    "JSON",
+    "response-change-status-code.md",
+    "cookies",
+    "response-model.md",
+    "path_operation装饰器",
+    "schema-extra-example.md",
+    "OpenAPI",
+    "settings.md",
+    "Docker",
+    "sql-databases.md",
+    "MySQL",
+    "static-files.md",
+    "FastAPI",
+    "testing-events.md",
+    "TestClient",
+    "testing-websockets.md",
+    "TestClient",
+    "testing.md",
+    "Python 3.8",
+    "using-request-directly.md",
+    "OpenAPI 注释",
+    "virtual-environments.md",
+    "自动化部署",
+    "websockets.md",
+    "FastAPI",
+    "wsgi.md",
+    "Django",
+    "MySQL-基础篇.pdf",
+    "major",
+    "MySQL-运维篇.pdf",
+    "mysqld",
+    "MySQL-进阶篇.pdf",
+    "Kubernetes",
+    "MySQL必知必会.pdf",
+    "数据库引擎"
+  ],
+  "edges": [
+    {
+      "source": "Bilen_Dynamic_Image_Networks_CVPR_2016_paper.pdf",
+      "target": "平均图模型",
+      "value": 1
+    },
+    {
+      "source": "d2l-zh-pytorch.pdf",
+      "target": "torch.ones",
+      "value": 1
+    },
+    {
+      "source": "cp08-样章示例-TensorFlow Lite",
+      "target": "TFLite模型",
+      "value": 1
+    },
+    {
+      "source": "《鸟哥的Linux私房菜》",
+      "target": "RAID-0",
+      "value": 1
+    },
+    {
+      "source": "DCNN based human activity recognition framework with depth vision guiding.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "Deep learning for sensor-based human activity recognition Overview, challenges, and opportunities.pdf",
+      "target": "summarization",
+      "value": 1
+    },
+    {
+      "source": "1-s2",
+      "target": "Kubernetes",
+      "value": 1
+    },
+    {
+      "source": "1-s2",
+      "target": "Kubernetes",
+      "value": 1
+    },
+    {
+      "source": "1-s2",
+      "target": "Kubernetes",
+      "value": 1
+    },
+    {
+      "source": "2312",
+      "target": "optimization",
+      "value": 1
+    },
+    {
+      "source": "2411",
+      "target": "operator",
+      "value": 1
+    },
+    {
+      "source": "3D Ball Localization From A Single Calibrated Image_zh",
+      "target": "TensorFlow",
+      "value": 1
+    },
+    {
+      "source": "3D_Convolutional_Neural_Networks_for_Human_Action_Recognition",
+      "target": "classifier",
+      "value": 1
+    },
+    {
+      "source": "923-Article Text-1720-2-10-20220519",
+      "target": "motion recognition",
+      "value": 1
+    },
+    {
+      "source": "A survey on deep learning-based real-time crowd anomaly detection",
+      "target": "机器学习算法",
+      "value": 1
+    },
+    {
+      "source": "Deep learning in computer vision principles and applications (Mahmoud Hassaballah, Ali Ismail Awad) (Z-Library).pdf",
+      "target": "automated mapping",
+      "value": 1
+    },
+    {
+      "source": "Action recognition using optimized deep autoencoder and CNN for",
+      "target": "classifier",
+      "value": 1
+    },
+    {
+      "source": "Ball tracking and trajectory prediction system for tennis robots",
+      "target": "model",
+      "value": 1
+    },
+    {
+      "source": "Bilen_Dynamic_Image_Networks_CVPR_2016_paper",
+      "target": "operator",
+      "value": 1
+    },
+    {
+      "source": "Estimation of Camera Pose, Nonlinear.pdf",
+      "target": "quaternions",
+      "value": 1
+    },
+    {
+      "source": "Fast R-CNN.pdf",
+      "target": "max-pooling",
+      "value": 1
+    },
+    {
+      "source": "Faster R-CNN.pdf",
+      "target": "深度神经网络",
+      "value": 1
+    },
+    {
+      "source": "Human segmentation in surveillance video with deep learning.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "Human_Action_Recognition_From_Various_Data_Modalities_A_Review.pdf",
+      "target": "motion patterns",
+      "value": 1
+    },
+    {
+      "source": "IJCS_48_4_02.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "Intelligent Video Analytics for Human Action Recognition The State of Knowledge.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "International Journal of Intelligent Systems - 2024 - Dastbaravardeh - Channel Attention‐Based Approach with Autoencoder.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "LLM-v1.0.0.pdf",
+      "target": "bash",
+      "value": 1
+    },
+    {
+      "source": "Mask R-CNN.pdf",
+      "target": "深度神经网络",
+      "value": 1
+    },
+    {
+      "source": "OpenPose Realtime Multi-Person 2D PoseEstimation using Part Affinity Fields.pdf",
+      "target": "人脸识别",
+      "value": 1
+    },
+    {
+      "source": "Pedestrian attribute recognition A survey.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "Pose2Trajectory 使用 Transformers 基于身体姿势预测网球运动员的轨迹.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "R-CNN.pdf",
+      "target": "深度神经网络",
+      "value": 1
+    },
+    {
+      "source": "RetinaNet.pdf",
+      "target": "CNN",
+      "value": 1
+    },
+    {
+      "source": "s11263-022-01594-9.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "sensors-19-01005.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "SkateFormer Skeletal-Temporal Transformer for Human Action Recognition.pdf",
+      "target": "learning",
+      "value": 1
+    },
+    {
+      "source": "SlowFast Networks for Video Recognition.pdf",
+      "target": "深度卷积神经网络",
+      "value": 1
+    },
+    {
+      "source": "SSD.pdf",
+      "target": "data augmentation",
+      "value": 1
+    },
+    {
+      "source": "STNet羽毛球运动小目标定位跟踪网络.pdf",
+      "target": "learning",
+      "value": 1
+    },
+    {
+      "source": "Toward human activity recognition a survey.pdf",
+      "target": "Dense trajectories",
+      "value": 1
+    },
+    {
+      "source": "TrackNet A Deep Learning Network for TrackingHigh-speed and Tiny Objects in Sports Applications.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "TrackNetV2 Efficient Shuttlecock TrackingNetwork.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "TrackNetV3.pdf",
+      "target": "data augmentation",
+      "value": 1
+    },
+    {
+      "source": "TrackNetV4 Enhancing Fast Sports Object.pdf",
+      "target": "max-pooling",
+      "value": 1
+    },
+    {
+      "source": "YO-CSA-T A Real-time Badminton Tracking System Utilizing YOLOBased on Contextual and Spatial Attention.pdf",
+      "target": "ImageNet",
+      "value": 1
+    },
+    {
+      "source": "YOLOv1.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "YOLOv2.pdf",
+      "target": "深度神经网络",
+      "value": 1
+    },
+    {
+      "source": "YOLOv3.pdf",
+      "target": "深度神经网络",
+      "value": 1
+    },
+    {
+      "source": "YOLOv4.pdf",
+      "target": "max-pooling",
+      "value": 1
+    },
+    {
+      "source": "YOLOv5.pdf",
+      "target": "ReLU层",
+      "value": 1
+    },
+    {
+      "source": "YOLOv5s-Megvii.pdf",
+      "target": "ImageNet",
+      "value": 1
+    },
+    {
+      "source": "YOLOv6.pdf",
+      "target": "Tensor",
+      "value": 1
+    },
+    {
+      "source": "YOLOv7.pdf",
+      "target": "LSTM",
+      "value": 1
+    },
+    {
+      "source": "中国计算机学会推荐国际学术会议和期刊目录-2022.pdf",
+      "target": "人工智能",
+      "value": 1
+    },
+    {
+      "source": "周志华-机器学习.pdf",
+      "target": "learning",
+      "value": 1
+    },
+    {
+      "source": "additional-responses.md",
+      "target": "HTTPvalidationError",
+      "value": 1
+    },
+    {
+      "source": "additional-status-codes.md",
+      "target": "OpenAPI",
+      "value": 1
+    },
+    {
+      "source": "advanced-dependencies.md",
+      "target": "__call__",
+      "value": 1
+    },
+    {
+      "source": "async.md",
+      "target": "机器学习",
+      "value": 1
+    },
+    {
+      "source": "background-tasks.md",
+      "target": "异步IO",
+      "value": 1
+    },
+    {
+      "source": "behind-a-proxy.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "bigger-applications.md",
+      "target": "users",
+      "value": 1
+    },
+    {
+      "source": "body-fields.md",
+      "target": "Field",
+      "value": 1
+    },
+    {
+      "source": "cloud.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "concepts.md",
+      "target": "Kubernetes",
+      "value": 1
+    },
+    {
+      "source": "cors.md",
+      "target": "expose_headers",
+      "value": 1
+    },
+    {
+      "source": "custom-response.md",
+      "target": "fastapi",
+      "value": 1
+    },
+    {
+      "source": "docker.md",
+      "target": "Kubernetes",
+      "value": 1
+    },
+    {
+      "source": "encoder.md",
+      "target": "JSON",
+      "value": 1
+    },
+    {
+      "source": "environment-variables.md",
+      "target": "Python环境变量",
+      "value": 1
+    },
+    {
+      "source": "events.md",
+      "target": "Python",
+      "value": 1
+    },
+    {
+      "source": "extra-models.md",
+      "target": "email",
+      "value": 1
+    },
+    {
+      "source": "fastapi-cli.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "features.md",
+      "target": "OpenAPI",
+      "value": 1
+    },
+    {
+      "source": "first-steps.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "general.md",
+      "target": "OpenAPI",
+      "value": 1
+    },
+    {
+      "source": "generate-clients.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "handling-errors.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "header-param-models.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "http-basic-auth.md",
+      "target": "compare_digest",
+      "value": 1
+    },
+    {
+      "source": "https.md",
+      "target": "DNS服务器",
+      "value": 1
+    },
+    {
+      "source": "metadata.md",
+      "target": "自动化部署",
+      "value": 1
+    },
+    {
+      "source": "oauth2-scopes.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "openapi-callbacks.md",
+      "target": "Uvicorn",
+      "value": 1
+    },
+    {
+      "source": "path-params.md",
+      "target": "OpenAPI",
+      "value": 1
+    },
+    {
+      "source": "Python修炼之道.pdf",
+      "target": "bash",
+      "value": 1
+    },
+    {
+      "source": "query-params-str-validations.md",
+      "target": "S3存储服务",
+      "value": 1
+    },
+    {
+      "source": "request-files.md",
+      "target": "python-multipart",
+      "value": 1
+    },
+    {
+      "source": "request-forms-and-files.md",
+      "target": "JSON",
+      "value": 1
+    },
+    {
+      "source": "response-change-status-code.md",
+      "target": "cookies",
+      "value": 1
+    },
+    {
+      "source": "response-model.md",
+      "target": "path_operation装饰器",
+      "value": 1
+    },
+    {
+      "source": "schema-extra-example.md",
+      "target": "OpenAPI",
+      "value": 1
+    },
+    {
+      "source": "settings.md",
+      "target": "Docker",
+      "value": 1
+    },
+    {
+      "source": "sql-databases.md",
+      "target": "MySQL",
+      "value": 1
+    },
+    {
+      "source": "static-files.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "testing-events.md",
+      "target": "TestClient",
+      "value": 1
+    },
+    {
+      "source": "testing-websockets.md",
+      "target": "TestClient",
+      "value": 1
+    },
+    {
+      "source": "testing.md",
+      "target": "Python 3.8",
+      "value": 1
+    },
+    {
+      "source": "using-request-directly.md",
+      "target": "OpenAPI 注释",
+      "value": 1
+    },
+    {
+      "source": "virtual-environments.md",
+      "target": "自动化部署",
+      "value": 1
+    },
+    {
+      "source": "websockets.md",
+      "target": "FastAPI",
+      "value": 1
+    },
+    {
+      "source": "wsgi.md",
+      "target": "Django",
+      "value": 1
+    },
+    {
+      "source": "MySQL-基础篇.pdf",
+      "target": "major",
+      "value": 1
+    },
+    {
+      "source": "MySQL-运维篇.pdf",
+      "target": "mysqld",
+      "value": 1
+    },
+    {
+      "source": "MySQL-进阶篇.pdf",
+      "target": "Kubernetes",
+      "value": 1
+    },
+    {
+      "source": "MySQL必知必会.pdf",
+      "target": "数据库引擎",
+      "value": 1
+    }
+  ]
+}
