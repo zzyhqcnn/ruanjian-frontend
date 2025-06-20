@@ -1,5 +1,8 @@
 <template>
   <div class="bookshelf-page">
+    <!-- 背景"学"字 -->
+    <div class="background-text">学</div>
+
     <!-- 主容器 -->
     <div class="bookshelf-container">
       <!-- 左侧切换按钮 -->
@@ -8,7 +11,12 @@
       </div>
 
       <!-- 书籍网格 -->
-      <div class="books-grid-container" ref="booksContainer" @scroll="handleScroll">
+      <div
+        class="books-grid-container"
+        ref="booksContainer"
+        @scroll="handleScroll"
+        @wheel="handleWheel"
+      >
         <div class="books-grid">
           <!-- 上传卡片 -->
           <div class="book-card upload-card">
@@ -21,12 +29,12 @@
           <!-- 书籍卡片 -->
           <div class="book-card" v-for="(book, index) in books" :key="index">
             <div class="book-cover">
-              <img :src="book.coverImg" alt="Book Cover" />
+              <img src="@/assets/cover.png" alt="Book Cover" />
             </div>
-            <div class="book-title">{{ book.title }}</div>
-            <div class="book-info">
-              <div class="book-author">{{ book.author }}</div>
-              <div class="book-metadata">{{ book.pages }}页 · {{ book.format }}</div>
+            <div class="book-content">
+              <h3 class="book-title">{{ book.title }}</h3>
+              <div class="divider"></div>
+              <p class="book-description">{{ book.description }}</p>
             </div>
           </div>
         </div>
@@ -52,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
 // @ts-ignore - Suppress TypeScript error for missing declaration file
 import { animate } from '@/animejs/lib/anime.esm.js'
 
@@ -60,68 +68,92 @@ import { animate } from '@/animejs/lib/anime.esm.js'
 const booksContainer = ref<HTMLElement | null>(null)
 const activePage = ref(0)
 const pageCount = ref(3) // 初始页数，将根据实际内容计算更新
+const cardsPerPage = 10 // 每页显示的卡片数量（2行×5列）
+const visibleColumns = 5 // 一页显示的列数
+
+// 计算总列数
+const totalColumns = computed(() => {
+  // 总卡片数量（包括上传卡片）
+  const totalCards = books.value.length + 1
+  // 计算总列数
+  return Math.ceil(totalCards / 2) // 每列2个卡片
+})
 
 // 书籍数据
 const books = ref([
   {
     id: 1,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
+    coverImg: '@/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 2,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
+    coverImg: '@/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 3,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
+    coverImg: '@/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 4,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 5,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 6,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 7,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 8,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
@@ -129,11 +161,13 @@ const books = ref([
   },
   {
     id: 9,
-    title: 'NumPy数组是Python世界中数值数据的标准表示形式',
+    title: 'bookname.pdf',
     author: '李玉生',
     pages: 258,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 10,
@@ -142,6 +176,8 @@ const books = ref([
     pages: 180,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
   {
     id: 11,
@@ -150,31 +186,125 @@ const books = ref([
     pages: 320,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 12,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 13,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 14,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 15,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 16,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 17,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 18,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
+  },
+  {
+    id: 19,
+    title: '计算机视觉综合测试题',
+    author: '王教授',
+    pages: 320,
+    format: 'PDF',
+    coverImg: '@/src/assets/cover.png',
+    description:
+      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
 ])
 
 // 计算页面指示器点数
 const calculatePageCount = () => {
-  // 获取卡片网格中的卡片数量（包括上传卡片）
-  const totalCards = books.value.length + 1
-  // 每行显示5个卡片
-  const cardsPerRow = 5
-  // 计算行数
-  const rows = Math.ceil(totalCards / cardsPerRow)
-  // 根据行数计算点数 (行数//2+1)
-  pageCount.value = Math.floor(rows / 2) + 1
+  // 总列数 - 一页显示的列数 + 1
+  const dots = totalColumns.value > visibleColumns ? totalColumns.value - visibleColumns + 1 : 1
+  pageCount.value = dots
+}
+
+// 处理鼠标滚轮事件，实现横向滚动
+const handleWheel = (e: WheelEvent) => {
+  if (!booksContainer.value) return
+
+  // 阻止默认垂直滚动
+  e.preventDefault()
+
+  // 滚动方向调整为水平，大幅增加滚动速度系数
+  const speedMultiplier = 8
+  booksContainer.value.scrollLeft += e.deltaY * speedMultiplier
+
+  // 滚动后更新指示器
+  handleScroll()
 }
 
 // 处理滚动事件
 const handleScroll = () => {
   if (!booksContainer.value) return
 
-  const scrollTop = booksContainer.value.scrollTop
-  const scrollHeight = booksContainer.value.scrollHeight
-  const clientHeight = booksContainer.value.clientHeight
+  const scrollLeft = booksContainer.value.scrollLeft
+  const scrollWidth = booksContainer.value.scrollWidth
+  const clientWidth = booksContainer.value.clientWidth
 
   // 计算滚动百分比
-  const scrollPercentage = scrollTop / (scrollHeight - clientHeight)
+  const maxScrollLeft = scrollWidth - clientWidth
+  // 防止除以零
+  const scrollPercentage = maxScrollLeft > 0 ? scrollLeft / maxScrollLeft : 0
 
   // 根据滚动百分比确定当前页
   const newActivePage = Math.min(
@@ -192,19 +322,22 @@ const handleScroll = () => {
 const scrollToPage = (index: number) => {
   if (!booksContainer.value) return
 
-  const scrollHeight = booksContainer.value.scrollHeight
-  const clientHeight = booksContainer.value.clientHeight
+  const scrollWidth = booksContainer.value.scrollWidth
+  const clientWidth = booksContainer.value.clientWidth
 
-  // 分页滚动计算
-  const pageHeight = scrollHeight / pageCount.value
-  const targetScrollTop = index * pageHeight
+  // 计算每页滚动的距离
+  const maxScrollLeft = scrollWidth - clientWidth
+  const scrollPerPage = maxScrollLeft / (pageCount.value - 1)
+
+  // 如果只有一页，不需要滚动
+  const targetScrollLeft = pageCount.value > 1 ? index * scrollPerPage : 0
 
   // 更新激活页
   activePage.value = index
 
   // 使用动画平滑滚动
   animate(booksContainer.value, {
-    scrollTop: targetScrollTop,
+    scrollLeft: targetScrollLeft,
     duration: 600,
     easing: 'easeInOutQuad',
     complete: () => {
@@ -233,6 +366,7 @@ onMounted(() => {
   height: 100%;
   padding: 1rem;
   position: relative;
+  height: 100%;
   box-sizing: border-box;
 }
 
@@ -249,11 +383,13 @@ onMounted(() => {
 .books-grid-container {
   flex: 1;
   height: 100%;
-  overflow-y: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   position: relative;
   padding: 0 2rem;
+  scroll-behavior: smooth;
 }
 
 .books-grid-container::-webkit-scrollbar {
@@ -263,9 +399,12 @@ onMounted(() => {
 /* 书籍网格 */
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-flow: column;
   gap: 2rem;
-  padding: 1rem;
+  padding: 0.7rem 3rem 1rem 3rem;
+  height: 100%;
 }
 
 /* 书籍卡片样式 */
@@ -273,8 +412,9 @@ onMounted(() => {
   background-color: #ffffff;
   border-radius: 12px;
   padding: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  width: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  height: 280px;
   overflow: hidden;
   cursor: pointer;
   transition:
@@ -282,11 +422,12 @@ onMounted(() => {
     box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .book-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  /* transform: translateY(-5px); */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* 上传卡片样式 */
@@ -324,52 +465,61 @@ onMounted(() => {
 /* 书籍封面 */
 .book-cover {
   width: 100%;
-  height: 200px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .book-cover img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: blur(2px);
+  opacity: 0.55;
 }
 
-/* 书籍标题和信息 */
-.book-title {
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  margin: 0.75rem 1rem 0.25rem;
-  color: #1a1a1a;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.book-info {
-  padding: 0 1rem 1rem;
+.book-content {
+  position: relative;
+  z-index: 2;
+  padding: 1rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  justify-content: flex-end;
 }
 
-.book-author {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
-  color: #666;
-}
-
-.book-metadata {
+/* 书籍标题 */
+.book-title {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 12px;
-  color: #888;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin: 1rem 0 0.5rem 0;
+}
+
+/* 分隔线 */
+.divider {
+  width: 100%;
+  height: 5px;
+  background-color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+/* 书籍描述 */
+.book-description {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #64635f;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  margin: 0;
 }
 
 /* 导航按钮 */
@@ -404,7 +554,7 @@ onMounted(() => {
 /* 页面指示器 */
 .page-indicator {
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   display: flex;
   gap: 10px;
   z-index: 10;
@@ -449,5 +599,19 @@ onMounted(() => {
   .books-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* 背景"学"字样式 */
+.background-text {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-family: 'ChillHuoSong_F', sans-serif;
+  font-size: 120px;
+  color: #eaecf4;
+  z-index: -1;
+  user-select: none;
+  opacity: 0.7;
+  pointer-events: none;
 }
 </style>
