@@ -5,10 +5,10 @@
 
     <!-- 主容器 -->
     <div class="bookshelf-container">
-      <!-- 左侧切换按钮 -->
+      <!-- 左侧切换按钮
       <div class="nav-button left">
         <span class="nav-arrow">&#8249;</span>
-      </div>
+      </div> -->
 
       <!-- 书籍网格 -->
       <div
@@ -19,7 +19,7 @@
       >
         <div class="books-grid">
           <!-- 上传卡片 -->
-          <div class="book-card upload-card">
+          <div class="upload-card">
             <div class="upload-icon">
               <img src="@/assets/icons/upload.svg" alt="Upload" />
             </div>
@@ -27,23 +27,27 @@
           </div>
 
           <!-- 书籍卡片 -->
-          <div class="book-card" v-for="(book, index) in books" :key="index">
-            <div class="book-cover">
-              <img src="@/assets/cover.png" alt="Book Cover" />
+
+          <Book v-for="(book, index) in books" :key="index">
+            <div class="book-card">
+              <div class="book-cover">
+                <img src="@/assets/cover.png" alt="Book Cover" />
+              </div>
+
+              <div class="book-content">
+                <h3 class="book-title">{{ book.title }}</h3>
+                <div class="divider"></div>
+                <p class="book-description">{{ book.description }}</p>
+              </div>
             </div>
-            <div class="book-content">
-              <h3 class="book-title">{{ book.title }}</h3>
-              <div class="divider"></div>
-              <p class="book-description">{{ book.description }}</p>
-            </div>
-          </div>
+          </Book>
         </div>
       </div>
 
       <!-- 右侧切换按钮 -->
-      <div class="nav-button right">
+      <!-- <div class="nav-button right">
         <span class="nav-arrow">&#8250;</span>
-      </div>
+      </div> -->
     </div>
 
     <!-- 页面指示器 -->
@@ -63,6 +67,7 @@
 import { ref, onMounted, nextTick, computed } from 'vue'
 // @ts-ignore - Suppress TypeScript error for missing declaration file
 import { animate } from '@/animejs/lib/anime.esm.js'
+import Book from '@/components/book/Book.vue'
 
 // 页面状态
 const booksContainer = ref<HTMLElement | null>(null)
@@ -87,7 +92,7 @@ const books = ref([
     author: '李玉生',
     pages: 258,
     format: 'PDF',
-    coverImg: '@/assets/cover.png',
+    coverImg: '@/assets/paper.jpg',
     description:
       'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
@@ -107,7 +112,7 @@ const books = ref([
     author: '李玉生',
     pages: 258,
     format: 'PDF',
-    coverImg: '@/assets/cover.png',
+    coverImg: '@/assets/paper.jpg',
     description:
       'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
@@ -117,7 +122,7 @@ const books = ref([
     author: '李玉生',
     pages: 258,
     format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
+    coverImg: '@/assets/paper.jpg',
     description:
       'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
@@ -158,116 +163,6 @@ const books = ref([
     pages: 258,
     format: 'PDF',
     coverImg: '@/src/assets/cover.png',
-  },
-  {
-    id: 9,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 10,
-    title: 'Hadoop综合测试题',
-    author: '张老师',
-    pages: 180,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 11,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 12,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 13,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 14,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 15,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 16,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 17,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 18,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 19,
-    title: '计算机视觉综合测试题',
-    author: '王教授',
-    pages: 320,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
   },
 ])
 
@@ -402,19 +297,21 @@ onMounted(() => {
   grid-template-columns: repeat(auto-fill, 200px);
   grid-template-rows: repeat(2, 1fr);
   grid-auto-flow: column;
-  gap: 2rem;
-  padding: 0.7rem 3rem 1rem 3rem;
+  gap: 3rem;
+  padding: 1rem 3rem 1rem 3rem;
   height: 100%;
 }
 
 /* 书籍卡片样式 */
 .book-card {
   background-color: #ffffff;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 200px;
-  height: 280px;
+  width: 230px;
+  height: 300px;
+  margin-left: -30px;
+  margin-bottom: -30px;
   overflow: hidden;
   cursor: pointer;
   transition:
@@ -425,7 +322,7 @@ onMounted(() => {
   position: relative;
 }
 
-.book-card:hover {
+.upload-card:hover {
   /* transform: translateY(-5px); */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
@@ -438,8 +335,11 @@ onMounted(() => {
   justify-content: center;
   height: 280px;
   border: 2px dashed #d9d9da;
-  background-color: #f5f7fa;
+  /* background-color: #ffffff; */
   box-shadow: none;
+  height: 300px;
+  width: 230px;
+  border-radius: 10px;
 }
 
 .upload-icon {
@@ -451,15 +351,15 @@ onMounted(() => {
 }
 
 .upload-icon img {
-  width: 80px;
-  height: 80px;
+  width: 150px;
+  height: 150px;
 }
 
 .upload-text {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   color: #1a1a1a;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 /* 书籍封面 */
@@ -476,8 +376,12 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(2px);
+  filter: blur(5px);
   opacity: 0.55;
+}
+
+.ba {
+  background-color: aqua;
 }
 
 .book-content {
@@ -491,9 +395,9 @@ onMounted(() => {
 
 /* 书籍标题 */
 .book-title {
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Noto Serif SC', serif;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   color: #1a1a1a;
   line-height: 1.4;
   margin: 1rem 0 0.5rem 0;
@@ -504,15 +408,15 @@ onMounted(() => {
   width: 100%;
   height: 5px;
   background-color: #1a1a1a;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 /* 书籍描述 */
 .book-description {
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Noto Serif SC', serif;
   font-size: 14px;
-  font-weight: bold;
-  color: #64635f;
+  font-weight: 600;
+  color: #1a1a1a;
   line-height: 1.5;
   overflow: hidden;
   text-overflow: ellipsis;

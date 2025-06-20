@@ -42,13 +42,13 @@ export const BOOK_COLOR_MAP = {
   fuchsia: { from: 'from-fuchsia-900', to: 'to-fuchsia-700' },
   pink: { from: 'from-pink-900', to: 'to-pink-700' },
   rose: { from: 'from-rose-900', to: 'to-rose-700' },
+  random: { from: 'from-zinc-900', to: 'to-zinc-700' },
 } as const
 
 export type BookColor = keyof typeof BOOK_COLOR_MAP
 export type BookSize = keyof typeof BOOK_SIZE_MAP
 export type BookRadius = keyof typeof BOOK_RADIUS_MAP
 export type BookShadowSize = keyof typeof BOOK_SHADOW_SIZE_MAP
-
 export { default as Book } from './Book.vue'
 export { default as BookHeader } from './BookHeader.vue'
 export { default as BookTitle } from './BookTitle.vue'

@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { h } from 'vue'
 import TempRoute from '@/views/TempRoute.vue'
+import type { RouteRecordRaw } from 'vue-router'
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('@/views/LayoutPage.vue'),
@@ -28,6 +29,10 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/LoginPage.vue'),
+    meta: {
+      title: '登录',
+      requiresAuth: false,
+    },
   },
   {
     path: '/register',
@@ -44,6 +49,15 @@ const routes = [
         component: () => import('@/views/student/StudentHomePage.vue'),
       },
       {
+        path: 'dashboard',
+        name: 'StudentDashboard',
+        component: () => h(TempRoute, { title: '学生仪表盘' }),
+        meta: {
+          title: '学生仪表盘',
+          requiresAuth: true,
+        },
+      },
+      {
         path: 'test',
         name: 'StudentTest',
         component: () => import('@/views/student/StudentTestPage.vue'),
@@ -56,7 +70,11 @@ const routes = [
       {
         path: 'resources',
         name: 'StudentResources',
-        component: () => h(TempRoute, { title: '学习资源' }),
+        component: () => import('@/views/student/StudyResourcesPage.vue'),
+        meta: {
+          title: '学习资源',
+          requiresAuth: true,
+        },
       },
       {
         path: 'bookshelf',
@@ -66,15 +84,15 @@ const routes = [
       {
         path: 'ai-chat',
         name: 'StudentAIChat',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">智能对话</div>',
-        },
+        component: () => import('@/views/student/StudentAIChatPage.vue'),
       },
       {
         path: 'interaction',
         name: 'StudentInteraction',
-        component: {
-          template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">师生互动</div>',
+        component: () => import('@/views/student/StudentInteractionPage.vue'),
+        meta: {
+          title: '师生互动',
+          requiresAuth: true,
         },
       },
     ],
@@ -90,6 +108,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+// 添加路由守卫
+router.beforeEach((to, from, next) => {
+  // 设置页面标题
+  if (to.meta.title) {
+    document.title = `智学平台 - ${to.meta.title}`
+  }
+
+  // 后续可添加权限验证逻辑
+  next()
 })
 
 export default router

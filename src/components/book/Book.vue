@@ -1,12 +1,5 @@
 <template>
-  <div
-    :class="
-      cn(
-        'z-10 group [perspective:800px] w-min [--shadowColor:#bbb] dark:[--shadowColor:#111]',
-        $props.class,
-      )
-    "
-  >
+  <div :class="cn('z-10 group [perspective:800px] w-min', $props.class)">
     <div
       :style="{ width: sizeMap[size].width, transition: `transform ${props.duration}ms ease` }"
       :class="[
@@ -29,6 +22,7 @@
         :style="{
           transform: 'translateZ(25px)',
           boxShadow: '5px 5px 20px var(--shadowColor)',
+          background: props.color === 'random' ? randomBackground : undefined,
         }"
       >
         <div
@@ -68,6 +62,7 @@
         :style="{
           transform: 'translateZ(-25px)',
           boxShadow: shadowSizeMap[shadowSize],
+          background: props.color === 'random' ? randomBackground : undefined,
         }"
       ></div>
     </div>
@@ -77,7 +72,7 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import {
   BOOK_RADIUS_MAP as radiusMap,
   BOOK_SIZE_MAP as sizeMap,
@@ -108,8 +103,21 @@ const props = withDefaults(defineProps<BookProps>(), {
   shadowSize: 'lg',
 })
 
+// Generate random gradient colors for background
+const generateRandomColor = () => {
+  const r = Math.floor(Math.random() * 255)
+  const g = Math.floor(Math.random() * 255)
+  const b = Math.floor(Math.random() * 255)
+  return `rgb(${r}, ${g}, ${b})`
+}
+
+const randomBackground = computed(() => {
+  const color1 = generateRandomColor()
+  const color2 = generateRandomColor()
+  return `linear-gradient(to top right, ${color1}, ${color2})`
+})
+
 const computedGradient = computed(() => {
   return colorMap[props.color] || colorMap.zinc
 })
 </script>
-    

@@ -67,7 +67,9 @@
 
     <!-- 内容区 -->
     <main class="content-area">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </main>
   </div>
 </template>
@@ -279,5 +281,17 @@ onMounted(() => {
   width: 100%;
   background-color: #f5f7fa;
   overflow: hidden; /* 禁止滚动 */
+  padding: 0;
+}
+
+/* 添加路由切换淡入动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

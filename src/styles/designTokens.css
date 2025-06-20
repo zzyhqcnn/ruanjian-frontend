@@ -1,0 +1,29 @@
+:root {
+  /* Color System */
+  --color-bg-primary: #f5f7fa;
+  --color-text-primary: #1a1a1a;
+  --color-text-inverted: #ffffff;
+  --color-button-dark-bg: #1a1a1a;
+  --color-button-light-bg: #ffffff;
+  --color-border: #d9d9da;
+
+  /* Typography */
+  --font-family-base: 'Noto Sans SC', 'Noto Serif SC', 'Sarasa UI SC', system-ui, sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Border Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

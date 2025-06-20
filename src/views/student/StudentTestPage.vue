@@ -314,10 +314,10 @@
     </div>
 
     <!-- 底部按钮 -->
-    <div class="action-button">
+    <!-- <div class="action-button">
       作业生成
       <span class="arrow-down">&#9660;</span>
-    </div>
+    </div> -->
 
     <!-- 详情弹窗 - 使用分离出的组件 -->
     <TestDetailModal v-model="showDetailModal" :test-data="activeCard" @close="closeDetailModal" />
@@ -552,7 +552,7 @@ onBeforeUnmount(() => {
   height: 85vh; /* 使用视口高度的85% */
   background-color: white;
   border-radius: 30px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); */
   padding: 1.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem; /* 减少底部边距，防止溢出 */
