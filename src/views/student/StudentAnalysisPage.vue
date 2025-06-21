@@ -584,6 +584,7 @@ onMounted(() => {
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: 'Sarasa UI SC', sans-serif;
 }
 
 .exercise-item:hover {
@@ -595,8 +596,8 @@ onMounted(() => {
 }
 
 .exercise-item.active {
-  background: rgba(26, 26, 26, 0.1);
-  border-color: rgba(26, 26, 26, 0.3);
+  /* background: rgba(26, 26, 26, 0.1); */
+  border-color: rgba(26, 26, 26, 0.511);
   /* box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2); */
 }
 
@@ -623,26 +624,28 @@ onMounted(() => {
 }
 
 .difficulty.easy {
-  background-color: rgba(40, 167, 69, 0.1);
+  /* background-color: rgba(40, 167, 69, 0.1); */
   color: #28a745;
-  border: 1px solid rgba(40, 167, 69, 0.3);
+  /* border: 1px solid rgba(40, 167, 69, 0.3); */
 }
 
 .difficulty.medium {
-  background-color: rgba(255, 193, 7, 0.1);
+  /* background-color: rgba(255, 193, 7, 0.1); */
   color: #ffc107;
-  border: 1px solid rgba(255, 193, 7, 0.3);
+  /* border: 1px solid rgba(255, 193, 7, 0.3); */
 }
 
 .difficulty.hard {
-  background-color: rgba(220, 53, 69, 0.1);
+  /* background-color: rgba(220, 53, 69, 0.1); */
   color: #dc3545;
-  border: 1px solid rgba(220, 53, 69, 0.3);
+  /* border: 1px solid rgba(220, 53, 69, 0.3); */
 }
 
 .exercise-type {
   color: #6c757d;
   font-size: 11px;
+  font-weight: 500;
+  font-family: 'Sarasa UI SC', sans-serif;
 }
 
 /* 右侧分析内容样式 */
@@ -1224,7 +1227,7 @@ onMounted(() => {
 
 .submit-btn:hover:not(:disabled) {
   background-color: #333333;
-  transform: translateY(-2px);
+  /* transform: translateY(-2px); */
   box-shadow: 0 6px 16px rgba(26, 26, 26, 0.3);
 }
 

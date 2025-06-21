@@ -1,0 +1,84 @@
+{
+  "testId": "cv-test-2023",
+  "title": "计算机视觉综合测试题",
+  "duration": 3600,
+  "questions": [
+    {
+      "id": 1,
+      "type": "multiple-choice",
+      "questionText": "在计算机视觉中，以下哪种滤波器最适合用于边缘检测？",
+      "options": ["均值滤波器", "高斯滤波器", "Sobel滤波器", "中值滤波器"],
+      "correctAnswer": 2,
+      "score": 5
+    },
+    {
+      "id": 2,
+      "type": "multiple-choice",
+      "questionText": "以下哪个不是OpenCV中常用的颜色空间？",
+      "options": ["RGB", "HSV", "CMYK", "LAB"],
+      "correctAnswer": 2,
+      "score": 5
+    },
+    {
+      "id": 3,
+      "type": "true-false",
+      "questionText": "Canny边缘检测算法使用两个阈值来检测强边缘和弱边缘。",
+      "correctAnswer": true,
+      "score": 3
+    },
+    {
+      "id": 4,
+      "type": "multiple-choice",
+      "questionText": "在图像金字塔中，下采样（Downsampling）的过程是：",
+      "options": [
+        "增加图像尺寸，减少分辨率",
+        "减少图像尺寸，增加分辨率",
+        "减少图像尺寸，减少分辨率",
+        "增加图像尺寸，增加分辨率"
+      ],
+      "correctAnswer": 2,
+      "score": 5
+    },
+    {
+      "id": 5,
+      "type": "true-false",
+      "questionText": "傅里叶变换可以用于将图像从空间域转换到频率域。",
+      "correctAnswer": true,
+      "score": 3
+    },
+    {
+      "id": 6,
+      "type": "multiple-choice",
+      "questionText": "SIFT（尺度不变特征变换）特征的主要优点是什么？",
+      "options": ["计算速度快", "对旋转和缩放不变性强", "特征维度低", "适合实时处理"],
+      "correctAnswer": 1,
+      "score": 5
+    },
+    {
+      "id": 7,
+      "type": "short-answer",
+      "questionText": "简述图像金字塔的概念及其在计算机视觉中的应用。",
+      "score": 10
+    },
+    {
+      "id": 8,
+      "type": "short-answer",
+      "questionText": "解释卷积神经网络（CNN）在图像识别任务中的工作原理及优势。",
+      "score": 10
+    },
+    {
+      "id": 9,
+      "type": "code",
+      "questionText": "使用Python和OpenCV实现一个简单的边缘检测器",
+      "description": "请编写一个函数detect_edges(image_path, threshold1, threshold2)，该函数读取指定路径的图像，使用Canny算法进行边缘检测，并返回处理后的图像。",
+      "score": 15
+    },
+    {
+      "id": 10,
+      "type": "code",
+      "questionText": "实现基于颜色的目标检测",
+      "description": "编写一个函数detect_color(image_path, lower_bound, upper_bound)，该函数可以在图像中检测指定HSV颜色范围内的区域，并用矩形框标记出来。返回标记后的图像。",
+      "score": 15
+    }
+  ]
+}

@@ -4,169 +4,177 @@
       <!-- Mac 风格按钮 -->
       <div class="mac-buttons">
         <div class="mac-button close" @click="$emit('close')"></div>
-        <div class="mac-button minimize"></div>
-        <div class="mac-button maximize"></div>
+        <div class="mac-button minimize" @click="minimizeModal"></div>
+        <div class="mac-button maximize" @click="maximizeModal"></div>
       </div>
 
-      <!-- 开始答题按钮 -->
-      <div class="start-answer-container">
-        <button class="start-answer-btn" @click="startAnswer">开始答题</button>
+      <!-- 答题页面 -->
+      <div v-if="showAnswerPage" class="answer-page-container">
+        <AnswerPage :testData="testData" @submitTest="handleSubmitTest" />
       </div>
 
-      <!-- 标题 -->
-      <h1 class="detail-title">{{ testData.title || '计算机视觉综合测试题' }}</h1>
-
-      <!-- 发布时间 -->
-      <div class="detail-time">截止时间：{{ testData.endTime || '2023年6月7日 19:18' }}</div>
-
-      <!-- 教师信息 -->
-      <div class="detail-creators">
-        <div class="creator">
-          <img src="/src/assets/avatar.png" alt="Teacher" class="creator-avatar" />
-          <div class="creator-info">
-            <div class="creator-name">李老师</div>
-            <div class="creator-role">教授</div>
-          </div>
+      <!-- 测试详情页面 -->
+      <div v-else>
+        <!-- 开始答题按钮 -->
+        <div class="start-answer-container">
+          <button class="start-answer-btn" @click="startAnswer">开始答题</button>
         </div>
 
-        <div class="creator">
-          <img src="/src/assets/avatar.png" alt="Admin" class="creator-avatar" />
-          <div class="creator-info">
-            <div class="creator-name">朱泳全</div>
-            <div class="creator-role">校长</div>
-          </div>
-        </div>
-      </div>
+        <!-- 标题 -->
+        <h1 class="detail-title">{{ testData.title || '计算机视觉综合测试题' }}</h1>
 
-      <!-- 分隔线 -->
-      <div class="divider"></div>
+        <!-- 发布时间 -->
+        <div class="detail-time">截止时间：{{ testData.endTime || '2023年6月7日 19:18' }}</div>
 
-      <!-- 标签 -->
-      <div class="detail-tags">
-        <span class="tag">边缘检测</span>
-        <span class="tag">OpenCV</span>
-        <span class="tag">Pillow</span>
-        <span class="tag">Numpy</span>
-        <span class="tag">Python</span>
-      </div>
-
-      <!-- 内容区域 -->
-      <div class="detail-content">
-        <div class="rating-section">
-          <h2>学生评价</h2>
-          <div class="rating-overview">
-            <div class="rating-score">
-              <div class="big-score">8.7</div>
-              <div class="stars">
-                <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
-                <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
-                <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
-                <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
-                <img src="@/assets/icons/wjx_gray.svg" alt="star" />
-              </div>
+        <!-- 教师信息 -->
+        <div class="detail-creators">
+          <div class="creator">
+            <img src="/src/assets/avatar.png" alt="Teacher" class="creator-avatar" />
+            <div class="creator-info">
+              <div class="creator-name">李老师</div>
+              <div class="creator-role">教授</div>
             </div>
-            <div class="rating-bars">
-              <div class="rating-bar-item">
-                <div class="stars-count">
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                </div>
-                <div class="bar-container">
-                  <div class="bar" style="width: 70%"></div>
-                </div>
-              </div>
-              <div class="rating-bar-item">
-                <div class="stars-count">
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                </div>
-                <div class="bar-container">
-                  <div class="bar" style="width: 20%"></div>
-                </div>
-              </div>
-              <div class="rating-bar-item">
-                <div class="stars-count">
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                </div>
-                <div class="bar-container">
-                  <div class="bar" style="width: 5%"></div>
-                </div>
-              </div>
-              <div class="rating-bar-item">
-                <div class="stars-count">
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                </div>
-                <div class="bar-container">
-                  <div class="bar" style="width: 3%"></div>
-                </div>
-              </div>
-              <div class="rating-bar-item">
-                <div class="stars-count">
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
-                  <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
-                </div>
-                <div class="bar-container">
-                  <div class="bar" style="width: 2%"></div>
-                </div>
-              </div>
+          </div>
+
+          <div class="creator">
+            <img src="/src/assets/avatar.png" alt="Admin" class="creator-avatar" />
+            <div class="creator-info">
+              <div class="creator-name">朱泳全</div>
+              <div class="creator-role">校长</div>
             </div>
           </div>
         </div>
 
-        <div class="word-cloud">
-          <div id="wordcloud-container"></div>
-          <div class="zoom-controls">
-            <button class="zoom-btn" @click="zoomInWordCloud" title="放大">+</button>
-            <button class="zoom-btn" @click="zoomOutWordCloud" title="缩小">-</button>
-          </div>
+        <!-- 分隔线 -->
+        <div class="divider"></div>
+
+        <!-- 标签 -->
+        <div class="detail-tags">
+          <span class="tag">边缘检测</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">Pillow</span>
+          <span class="tag">Numpy</span>
+          <span class="tag">Python</span>
         </div>
 
-        <div class="comments-section">
-          <div class="comments">
-            <div class="comment" v-for="(comment, index) in commentData" :key="index">
-              <img :src="comment.avatar" alt="User" class="comment-avatar" />
-              <div class="comment-wrapper">
-                <div class="comment-header">
-                  <div class="comment-user-info">
-                    <div class="comment-name">{{ comment.userName }}</div>
-                    <div class="comment-time">{{ formatRelativeTime(comment.timestamp) }}</div>
+        <!-- 内容区域 -->
+        <div class="detail-content">
+          <div class="rating-section">
+            <h2>学生评价</h2>
+            <div class="rating-overview">
+              <div class="rating-score">
+                <div class="big-score">8.7</div>
+                <div class="stars">
+                  <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
+                  <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
+                  <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
+                  <img src="@/assets/icons/wjx_yellow.svg" alt="star" />
+                  <img src="@/assets/icons/wjx_gray.svg" alt="star" />
+                </div>
+              </div>
+              <div class="rating-bars">
+                <div class="rating-bar-item">
+                  <div class="stars-count">
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
                   </div>
-                  <div class="comment-actions">
-                    <div class="comment-more">
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                  <div class="bar-container">
+                    <div class="bar" style="width: 70%"></div>
+                  </div>
+                </div>
+                <div class="rating-bar-item">
+                  <div class="stars-count">
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                  </div>
+                  <div class="bar-container">
+                    <div class="bar" style="width: 20%"></div>
+                  </div>
+                </div>
+                <div class="rating-bar-item">
+                  <div class="stars-count">
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                  </div>
+                  <div class="bar-container">
+                    <div class="bar" style="width: 5%"></div>
+                  </div>
+                </div>
+                <div class="rating-bar-item">
+                  <div class="stars-count">
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                  </div>
+                  <div class="bar-container">
+                    <div class="bar" style="width: 3%"></div>
+                  </div>
+                </div>
+                <div class="rating-bar-item">
+                  <div class="stars-count">
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" class="transparent" />
+                    <img src="@/assets/icons/wjx_small_gray.svg" alt="star" />
+                  </div>
+                  <div class="bar-container">
+                    <div class="bar" style="width: 2%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="word-cloud">
+            <div id="wordcloud-container"></div>
+            <div class="zoom-controls">
+              <button class="zoom-btn" @click="zoomInWordCloud" title="放大">+</button>
+              <button class="zoom-btn" @click="zoomOutWordCloud" title="缩小">-</button>
+            </div>
+          </div>
+
+          <div class="comments-section">
+            <div class="comments">
+              <div class="comment" v-for="(comment, index) in commentData" :key="index">
+                <img :src="comment.avatar" alt="User" class="comment-avatar" />
+                <div class="comment-wrapper">
+                  <div class="comment-header">
+                    <div class="comment-user-info">
+                      <div class="comment-name">{{ comment.userName }}</div>
+                      <div class="comment-time">{{ formatRelativeTime(comment.timestamp) }}</div>
+                    </div>
+                    <div class="comment-actions">
+                      <div class="comment-more">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="comment-content">
-                  <div class="comment-text">{{ comment.text }}</div>
-                </div>
-                <div class="comment-footer">
-                  <div class="comment-like">
-                    <img src="@/assets/icons/like.svg" alt="like" class="footer-icon" />
-                    <span>{{ comment.likes }}</span>
+                  <div class="comment-content">
+                    <div class="comment-text">{{ comment.text }}</div>
                   </div>
-                  <div class="comment-reply">
-                    <img src="@/assets/icons/reply.svg" alt="reply" class="footer-icon" />
-                    <span>回复</span>
+                  <div class="comment-footer">
+                    <div class="comment-like">
+                      <img src="@/assets/icons/like.svg" alt="like" class="footer-icon" />
+                      <span>{{ comment.likes }}</span>
+                    </div>
+                    <div class="comment-reply">
+                      <img src="@/assets/icons/reply.svg" alt="reply" class="footer-icon" />
+                      <span>回复</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -181,6 +189,7 @@
 <script setup lang="ts">
 import { watch, onBeforeUnmount, onMounted, ref } from 'vue'
 import { Chart } from '@antv/g2'
+import AnswerPage from './AnswerPage.vue'
 
 // 相对时间格式化函数
 const formatRelativeTime = (timestamp: number): string => {
@@ -227,6 +236,21 @@ const props = defineProps({
 
 // 定义Emits
 const emit = defineEmits(['close', 'update:modelValue', 'startAnswer'])
+
+// 答题页面显示控制
+const showAnswerPage = ref(false)
+
+// 开始答题
+const startAnswer = () => {
+  showAnswerPage.value = true
+}
+
+// 处理答题提交
+const handleSubmitTest = (result: any) => {
+  console.log('测试已提交:', result)
+  showAnswerPage.value = false
+  emit('close')
+}
 
 // 评论数据 - 使用时间戳
 const commentData = ref([
@@ -768,7 +792,7 @@ const initWordCloud = () => {
       .layout({
         spiral: 'rectangular',
         fontSize: [16, 50],
-        padding: 2,
+        // padding: 2,
         ratio: zoomLevel.value, // 控制词云的缩放比例
       })
       .style('fill', '#03a9f4')
@@ -823,6 +847,8 @@ watch(
       }, 300)
     } else {
       document.body.style.overflow = '' // 恢复背景滚动
+      // 当关闭模态框时，重置答题页面状态
+      showAnswerPage.value = false
     }
   },
 )
@@ -850,10 +876,53 @@ onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleEscKey)
 })
 
-// 开始答题
-const startAnswer = () => {
-  emit('startAnswer')
-  emit('close')
+// 窗口状态控制
+const isMinimized = ref(false)
+const isMaximized = ref(false)
+
+// 最小化模态框
+const minimizeModal = () => {
+  // 如果答题页面正在显示，则返回详情页面
+  if (showAnswerPage.value) {
+    showAnswerPage.value = false
+    return
+  }
+
+  // 否则执行原来的最小化功能
+  isMinimized.value = !isMinimized.value
+  const modalElement = document.querySelector('.detail-modal') as HTMLElement | null
+
+  if (!modalElement) return
+
+  if (isMinimized.value) {
+    // 保存当前高度，然后最小化
+    modalElement.style.height = '40px'
+    modalElement.style.overflow = 'hidden'
+  } else {
+    // 恢复原始高度
+    modalElement.style.height = '93vh'
+    modalElement.style.overflow = 'auto'
+  }
+}
+
+// 最大化模态框
+const maximizeModal = () => {
+  isMaximized.value = !isMaximized.value
+  const modalElement = document.querySelector('.detail-modal') as HTMLElement | null
+
+  if (!modalElement) return
+
+  if (isMaximized.value) {
+    // 保存原始尺寸，然后最大化
+    modalElement.style.width = '100%'
+    modalElement.style.height = '100vh'
+    modalElement.style.borderRadius = '0'
+  } else {
+    // 恢复原始尺寸
+    modalElement.style.width = '80%'
+    modalElement.style.height = '93vh'
+    modalElement.style.borderRadius = '20px'
+  }
 }
 </script>
 
@@ -1277,5 +1346,19 @@ const startAnswer = () => {
 .start-answer-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.answer-page-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: #f5f7fa;
+  border-radius: 20px;
+  overflow: auto; /* 改为auto而不是hidden，允许滚动 */
+  padding-top: 40px; /* 为Mac按钮留出空间 */
+  padding-bottom: 20px; /* 为底部按钮留出空间 */
 }
 </style>
