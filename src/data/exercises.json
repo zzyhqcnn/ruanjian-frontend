@@ -13,14 +13,6 @@
         "data": "# 构建一个简单的神经网络\n\n请使用PyTorch构建一个用于图像分类的卷积神经网络(CNN)，要求：\n\n1. 网络结构包含2个卷积层，每个卷积层后跟ReLU激活函数和最大池化层\n2. 最后包含2个全连接层\n3. 使用交叉熵损失函数\n4. 实现训练循环，包含前向传播、反向传播和参数更新\n\n请提供完整的代码实现。"
       },
 
-      "images": [
-        {
-          "url": "/images/cnn-architecture.png",
-          "description": "CNN网络架构图",
-          "alt": "卷积神经网络结构示意图"
-        }
-      ],
-
       "knowledgePoints": ["PyTorch", "CNN", "卷积神经网络", "图像分类", "反向传播", "激活函数"],
 
       "knowledgeExplanation": "## 卷积神经网络(CNN)基础\n\n卷积神经网络是深度学习中最常用的图像处理模型之一，主要特点包括：\n\n### 核心组件\n- **卷积层(Convolutional Layer)**: 提取图像特征\n- **激活函数(Activation Function)**: 引入非线性\n- **池化层(Pooling Layer)**: 降维和特征选择\n- **全连接层(Fully Connected Layer)**: 最终分类\n\n### PyTorch框架\nPyTorch提供了灵活的深度学习开发环境，支持动态计算图和自动微分。",
@@ -28,13 +20,11 @@
       "solutionSteps": [
         {
           "title": "导入必要的库",
-          "explanation": "首先导入PyTorch相关库和其他必要的模块：\n\n```python\nimport torch\nimport torch.nn as nn\nimport torch.optim as optim\nimport torch.nn.functional as F\n```",
-          "formula": "import torch\nimport torch.nn as nn\nimport torch.optim as optim\nimport torch.nn.functional as F"
+          "explanation": "首先导入PyTorch相关库和其他必要的模块：\n\n```python\nimport torch\nimport torch.nn as nn\nimport torch.optim as optim\nimport torch.nn.functional as F\n```"
         },
         {
           "title": "定义CNN网络结构",
-          "explanation": "创建一个继承自nn.Module的类，定义网络结构：\n\n```python\nclass SimpleCNN(nn.Module):\n    def __init__(self, num_classes=10):\n        super(SimpleCNN, self).__init__()\n        # 第一个卷积块\n        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(2, 2)\n        \n        # 第二个卷积块\n        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)\n        \n        # 全连接层\n        self.fc1 = nn.Linear(32 * 8 * 8, 128)\n        self.fc2 = nn.Linear(128, num_classes)\n    \n    def forward(self, x):\n        # 第一个卷积块\n        x = self.pool(F.relu(self.conv1(x)))\n        \n        # 第二个卷积块\n        x = self.pool(F.relu(self.conv2(x)))\n        \n        # 展平\n        x = x.view(-1, 32 * 8 * 8)\n        \n        # 全连接层\n        x = F.relu(self.fc1(x))\n        x = self.fc2(x)\n        \n        return x\n```",
-          "formula": "class SimpleCNN(nn.Module):\n    def __init__(self, num_classes=10):\n        super(SimpleCNN, self).__init__()\n        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(2, 2)\n        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)\n        self.fc1 = nn.Linear(32 * 8 * 8, 128)\n        self.fc2 = nn.Linear(128, num_classes)\n    \n    def forward(self, x):\n        x = self.pool(F.relu(self.conv1(x)))\n        x = self.pool(F.relu(self.conv2(x)))\n        x = x.view(-1, 32 * 8 * 8)\n        x = F.relu(self.fc1(x))\n        x = self.fc2(x)\n        return x"
+          "explanation": "创建一个继承自nn.Module的类，定义网络结构：\n\n```python\nclass SimpleCNN(nn.Module):\n    def __init__(self, num_classes=10):\n        super(SimpleCNN, self).__init__()\n        # 第一个卷积块\n        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(2, 2)\n        \n        # 第二个卷积块\n        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)\n        \n        # 全连接层\n        self.fc1 = nn.Linear(32 * 8 * 8, 128)\n        self.fc2 = nn.Linear(128, num_classes)\n    \n    def forward(self, x):\n        # 第一个卷积块\n        x = self.pool(F.relu(self.conv1(x)))\n        \n        # 第二个卷积块\n        x = self.pool(F.relu(self.conv2(x)))\n        \n        # 展平\n        x = x.view(-1, 32 * 8 * 8)\n        \n        # 全连接层\n        x = F.relu(self.fc1(x))\n        x = self.fc2(x)\n        \n        return x\n```"
         }
       ],
 
@@ -87,8 +77,7 @@
       "solutionSteps": [
         {
           "title": "查看所有运行进程",
-          "explanation": "使用ps命令查看进程信息：\n\n```bash\n# 查看所有进程\nps aux\n\n# 查看特定用户的进程\nps -u username\n\n# 查看进程树\nps -ef --forest\n```\n\n**命令解释**:\n- `ps aux`: 显示所有用户的进程\n- `a`: 显示所有进程\n- `u`: 显示详细信息\n- `x`: 显示没有控制终端的进程",
-          "formula": "ps aux\nps -u username\nps -ef --forest"
+          "explanation": "使用ps命令查看进程信息：\n\n```bash\n# 查看所有进程\nps aux\n\n# 查看特定用户的进程\nps -u username\n\n# 查看进程树\nps -ef --forest\n```\n\n**命令解释**:\n- `ps aux`: 显示所有用户的进程\n- `a`: 显示所有进程\n- `u`: 显示详细信息\n- `x`: 显示没有控制终端的进程"
         }
       ],
 
@@ -141,8 +130,7 @@
       "solutionSteps": [
         {
           "title": "数据加载与探索",
-          "explanation": "首先加载数据并了解数据结构：\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# 读取数据\ndf = pd.read_csv('sales_data.csv')\n\n# 查看数据基本信息\nprint(df.info())\nprint(df.head())\nprint(df.describe())\n\n# 检查缺失值\nprint(df.isnull().sum())\n```",
-          "formula": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\ndf = pd.read_csv('sales_data.csv')\nprint(df.info())\nprint(df.head())\nprint(df.describe())"
+          "explanation": "首先加载数据并了解数据结构：\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# 读取数据\ndf = pd.read_csv('sales_data.csv')\n\n# 查看数据基本信息\nprint(df.info())\nprint(df.head())\nprint(df.describe())\n\n# 检查缺失值\nprint(df.isnull().sum())\n```"
         }
       ],
 
@@ -219,18 +207,15 @@
       "solutionSteps": [
         {
           "title": "理解OSI模型层次",
-          "explanation": "OSI七层模型是一个概念性的网络架构，每一层都有特定的功能和协议。理解各层的作用是解答此类题目的关键。",
-          "formula": "应用层 → 表示层 → 会话层 → 传输层 → 网络层 → 数据链路层 → 物理层"
+          "explanation": "OSI七层模型是一个概念性的网络架构，每一层都有特定的功能和协议。理解各层的作用是解答此类题目的关键。"
         },
         {
           "title": "分析HTTP协议特性",
-          "explanation": "HTTP是超文本传输协议，主要用于Web浏览器和服务器之间的通信。它工作在应用层，为用户提供Web服务。",
-          "formula": "HTTP = 应用层协议 + Web通信 + 请求-响应模式"
+          "explanation": "HTTP是超文本传输协议，主要用于Web浏览器和服务器之间的通信。它工作在应用层，为用户提供Web服务。"
         },
         {
           "title": "排除错误选项",
-          "explanation": "通过分析各层的特点，可以排除明显错误的选项：\n- 物理层：处理比特流传输\n- 数据链路层：处理帧传输\n- 网络层：处理路由寻址\n- 应用层：处理用户服务",
-          "formula": "排除法：物理层、数据链路层、网络层都不是应用层协议"
+          "explanation": "通过分析各层的特点，可以排除明显错误的选项：\n- 物理层：处理比特流传输\n- 数据链路层：处理帧传输\n- 网络层：处理路由寻址\n- 应用层：处理用户服务"
         }
       ],
 

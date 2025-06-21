@@ -31,11 +31,11 @@
       :quantity="100"
     />
 
-    <div class="background-text">苏轼</div>
+    <div class="background-text">{{ homeData.backgroundText }}</div>
 
     <div class="content">
       <div class="quote-container">
-        <h1 class="quote">「粗缯大布裹生涯，腹有诗书气自华」</h1>
+        <h1 class="quote">{{ homeData.quote }}</h1>
       </div>
 
       <div class="actions">
@@ -62,6 +62,11 @@
 import InteractiveHoverButton from '@/components/buttons/InteractiveHoverButton.vue'
 import ParticlesBg from '@/components/ParticlesBg.vue'
 import SnowfallBg from '@/components/SnowfallBg.vue'
+import { homePageData } from '@/data/student'
+import { ref } from 'vue'
+
+// Use imported data
+const homeData = ref(homePageData)
 </script>
 
 <style scoped>

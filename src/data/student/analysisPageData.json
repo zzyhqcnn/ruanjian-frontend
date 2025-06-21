@@ -1,0 +1,7 @@
+{
+  "aiModelInfo": {
+    "modelName": "claude-4-sonnet-thinking",
+    "description": "我是基于先进的claude-4-sonnet-thinking模型构建，在Cursor IDE平台上为您提供全方位的技术支持，可以帮你完成很多与编程和开发相关的任务。",
+    "capabilities": ["代码分析", "技术支持", "问题解答", "代码生成", "代码优化", "代码重构"]
+  }
+}

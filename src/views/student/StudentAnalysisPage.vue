@@ -8,7 +8,7 @@
           <div class="mac-button minimize"></div>
           <div class="mac-button maximize"></div>
         </div>
-        <h2>习题列表</h2>
+        <!-- <h2>习题列表</h2> -->
         <div class="search-box">
           <input
             type="text"
@@ -17,7 +17,7 @@
             @input="filterExercises"
           />
           <div class="search-icon">
-            <img src="@/assets/icons/search.svg" alt="Search" />
+            <img src="@/assets/icons/search-black.svg" alt="Search" />
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
       <div v-if="selectedExercise" class="exercise-details">
         <!-- 题目部分 -->
         <section id="exercise-problem" class="detail-section">
-          <div class="section-header">
+          <!-- <div class="section-header">
             <h2>题目</h2>
             <div class="exercise-badges">
               <span class="difficulty-badge" :class="selectedExercise.difficulty">
@@ -90,13 +90,14 @@
               </span>
               <span class="type-badge">{{ selectedExercise.type }}</span>
             </div>
-          </div>
+          </div> -->
 
           <!-- 选择题内容 -->
           <div v-if="isMultipleChoice" class="multiple-choice-content">
-            <div class="question-text">
-              {{ (selectedExercise.content as MultipleChoiceContent).question }}
-            </div>
+            <div
+              class="question-text"
+              v-html="renderMarkdown((selectedExercise.content as MultipleChoiceContent).question)"
+            ></div>
 
             <div class="options-list">
               <div
@@ -123,7 +124,7 @@
                 </div>
                 <div class="option-content">
                   <div class="option-label">{{ option.id }}.</div>
-                  <div class="option-text">{{ option.text }}</div>
+                  <div class="option-text" v-html="renderMarkdown(option.text)"></div>
                 </div>
               </div>
             </div>
@@ -145,9 +146,12 @@
                   {{ isAnswerCorrect ? '回答正确！' : '回答错误' }}
                 </span>
               </div>
-              <div class="feedback-explanation">
-                {{ (selectedExercise.content as MultipleChoiceContent).explanation }}
-              </div>
+              <div
+                class="feedback-explanation"
+                v-html="
+                  renderMarkdown((selectedExercise.content as MultipleChoiceContent).explanation)
+                "
+              ></div>
             </div>
           </div>
 
@@ -202,11 +206,6 @@
               <div class="step-content">
                 <h3>{{ step.title }}</h3>
                 <div class="markdown-content" v-html="renderMarkdown(step.explanation)"></div>
-
-                <!-- 解题公式/代码 -->
-                <div v-if="step.formula" class="formula-container">
-                  <pre class="formula">{{ step.formula }}</pre>
-                </div>
               </div>
             </div>
           </div>
@@ -233,7 +232,7 @@
 
         <!-- 最终答案 -->
         <div class="final-answer">
-          <h3>最终答案</h3>
+          <!-- <h3>最终答案</h3> -->
           <div v-if="isMultipleChoice" class="answer-box">
             <div class="correct-answer">
               正确答案：<strong>{{
@@ -266,9 +265,72 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import SideIland from '@/components/SideIland.vue'
 import exercisesData from '@/data/exercises.json'
+import { aiModelInfo } from '@/data/student'
+import MarkdownIt from 'markdown-it'
+// @ts-ignore - markdown-it-anchor doesn't have typescript definitions
+import anchor from 'markdown-it-anchor'
+// @ts-ignore - markdown-it-katex doesn't have typescript definitions
+import katex from 'markdown-it-katex'
+import Prism from 'prismjs'
+// 导入基础样式和额外语言支持
+import 'prismjs/themes/prism.css'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-java'
+import 'prismjs/components/prism-c'
+import 'prismjs/components/prism-cpp'
+import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-css'
+// 导入KaTeX样式
+import 'katex/dist/katex.min.css'
+
+// 初始化markdown-it实例
+const md: MarkdownIt = new MarkdownIt({
+  html: true, // 允许HTML标签
+  breaks: true, // 转换'\n'为<br>
+  linkify: true, // 自动将URL转换为链接
+  typographer: true, // 启用一些语言中立的替换和引号美化
+  highlight: function (str: string, lang: string): string {
+    if (lang && Prism.languages[lang]) {
+      try {
+        return `<pre class="language-${lang}"><code class="language-${lang}">${Prism.highlight(str, Prism.languages[lang], lang)}</code></pre>`
+      } catch (err) {
+        console.error('Prism highlighting error:', err)
+      }
+    }
+    // 使用默认转义
+    return `<pre class="language-text"><code>${md.utils.escapeHtml(str)}</code></pre>`
+  },
+})
+
+// 添加锚点插件
+md.use(anchor, {
+  permalink: anchor.permalink.ariaHidden({
+    placement: 'before',
+    class: 'header-anchor',
+    symbol: '#',
+  }),
+  level: [1, 2, 3, 4],
+})
+
+// 添加数学公式支持
+md.use(katex)
+
+// AI model info is now available through aiModelInfo
+// This variable contains:
+// {
+//   modelName: "claude-4-sonnet-thinking",
+//   description: "我是基于先进的claude-4-sonnet-thinking模型构建，在Cursor IDE平台上为您提供全方位的技术支持，可以帮你完成很多与编程和开发相关的任务。",
+//   capabilities: ["代码分析", "技术支持", "问题解答", "代码生成", "代码优化", "代码重构"]
+// }
+
+// Function to respond to model-related questions
+const getModelResponse = (question: string): string => {
+  return aiModelInfo.description
+}
 
 // 类型定义
 interface ExerciseImage {
@@ -280,7 +342,6 @@ interface ExerciseImage {
 interface SolutionStep {
   title: string
   explanation: string
-  formula?: string
 }
 
 interface SimilarExercise {
@@ -332,40 +393,6 @@ interface Exercise {
   }
 }
 
-// 简单的Markdown转HTML函数
-const renderMarkdown = (text: string): string => {
-  if (!text) return ''
-
-  return (
-    text
-      // 处理标题
-      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-      // 处理粗体
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // 处理斜体
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      // 处理代码块
-      .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>')
-      // 处理行内代码
-      .replace(/`([^`]+)`/g, '<code>$1</code>')
-      // 处理列表
-      .replace(/^\* (.*$)/gim, '<li>$1</li>')
-      .replace(/^- (.*$)/gim, '<li>$1</li>')
-      // 处理段落
-      .replace(/\n\n/g, '</p><p>')
-      .replace(/^(?!<[h|li|pre|ul|ol])(.*$)/gim, '<p>$1</p>')
-      // 清理多余的p标签
-      .replace(/<p><\/p>/g, '')
-      .replace(/<p>(<h[1-6]>.*<\/h[1-6]>)<\/p>/g, '$1')
-      .replace(/<p>(<li>.*<\/li>)<\/p>/g, '<ul>$1</ul>')
-      .replace(/<p>(<pre>.*<\/pre>)<\/p>/g, '$1')
-      // 处理换行
-      .replace(/\n/g, '<br>')
-  )
-}
-
 // 状态变量
 const searchQuery = ref('')
 const selectedExerciseIndex = ref<number | null>(null)
@@ -375,6 +402,12 @@ const exercises = ref<Exercise[]>(exercisesData.exercises as Exercise[])
 
 // 计算属性：筛选后的习题列表
 const filteredExercises = ref(exercises.value)
+
+// 使用markdown-it渲染Markdown
+const renderMarkdown = (text: string): string => {
+  if (!text) return ''
+  return md.render(text)
+}
 
 // 选中的习题
 const selectedExercise = computed(() => {
@@ -413,11 +446,21 @@ const filterExercises = () => {
   })
 }
 
+// 定义一个函数来重新应用Prism高亮
+const applyPrismHighlighting = (): void => {
+  nextTick(() => {
+    Prism.highlightAll()
+  })
+}
+
 // 选择习题
 const selectExercise = (index: number) => {
   selectedExerciseIndex.value = index
   selectedAnswer.value = ''
   showAnswer.value = false
+
+  // 选择习题后应用语法高亮
+  applyPrismHighlighting()
 }
 
 // 选择答案
@@ -443,6 +486,9 @@ const loadSimilarExercise = (id: number) => {
     selectedExerciseIndex.value = index
     selectedAnswer.value = ''
     showAnswer.value = false
+
+    // 加载相似习题后应用语法高亮
+    applyPrismHighlighting()
   }
 }
 
@@ -454,13 +500,215 @@ const scrollToSection = (sectionId: string) => {
   }
 }
 
+// 监听selectedExercise的变化
+watch(
+  () => selectedExercise.value,
+  () => {
+    applyPrismHighlighting()
+  },
+)
+
 // 初始化时选择第一个习题
 onMounted(() => {
   if (exercises.value.length > 0) {
     selectedExerciseIndex.value = 0
+
+    // 初始加载完成后应用语法高亮
+    applyPrismHighlighting()
   }
 })
 </script>
+
+<style>
+/* 取消scoped，确保样式可以应用到动态生成的内容 */
+/* 将关键的markdown样式移至非scoped样式块 */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.markdown-content h1 {
+  font-size: 2em;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0.3em;
+}
+
+.markdown-content h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 0.3em;
+}
+
+.markdown-content h3 {
+  font-size: 1.25em;
+}
+
+.markdown-content h4 {
+  font-size: 1.1em;
+}
+
+.markdown-content p {
+  margin-bottom: 1em;
+}
+
+.markdown-content code {
+  background-color: #f8f9fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family:
+    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #495057;
+}
+
+.markdown-content pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.markdown-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 2em;
+  margin-bottom: 1em;
+}
+
+.markdown-content li {
+  margin-bottom: 0.5em;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid #1a1a1a;
+  padding-left: 1em;
+  margin: 1em 0;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Prism.js 语法高亮自定义样式 */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6a737d;
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #5e6687;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #07a;
+}
+
+.token.keyword {
+  color: #07a;
+  font-weight: bold;
+}
+
+.token.function {
+  color: #dd4a68;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* 改善代码块视觉效果 */
+pre[class*='language-'] {
+  position: relative;
+  border-radius: 8px;
+  margin: 1.5em 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+code[class*='language-'] {
+  border-radius: 6px;
+}
+
+/* KaTeX数学公式样式调整 */
+.katex-display {
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.katex {
+  font-size: 1.1em;
+}
+
+.header-anchor {
+  font-size: 0.8em;
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  margin-top: 0.125em;
+  opacity: 0;
+  text-decoration: none;
+  color: #6c757d;
+  transition: opacity 0.2s;
+}
+
+h1:hover .header-anchor,
+h2:hover .header-anchor,
+h3:hover .header-anchor,
+h4:hover .header-anchor {
+  opacity: 1;
+}
+
+.header-anchor:hover {
+  color: #1a1a1a;
+}
+</style>
 
 <style scoped>
 .analysis-container {
@@ -479,7 +727,7 @@ onMounted(() => {
   border-radius: 20px;
   margin: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); */
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -525,8 +773,9 @@ onMounted(() => {
 
 .list-header h2 {
   margin: 0 0 15px 0;
-  font-size: 18px;
+  font-size: 30px;
   color: #1a1a1a;
+  font-family: 'Noto Serif SC', serif;
   font-weight: 600;
 }
 
@@ -573,11 +822,11 @@ onMounted(() => {
 .list-content {
   flex: 1;
   overflow-y: auto;
-  padding: 10px;
+  padding: 20px;
 }
 
 .exercise-item {
-  padding: 15px;
+  padding: 10px 15px;
   margin-bottom: 8px;
   border-radius: 12px;
   cursor: pointer;
@@ -596,16 +845,18 @@ onMounted(() => {
 }
 
 .exercise-item.active {
-  /* background: rgba(26, 26, 26, 0.1); */
-  border-color: rgba(26, 26, 26, 0.511);
+  background: rgba(180, 180, 180, 0.1);
+  /* border-color: rgba(26, 26, 26, 0.511); */
   /* box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2); */
 }
 
 .exercise-title {
   font-weight: 600;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
   color: #1a1a1a;
-  font-size: 14px;
+  font-size: 16px;
+  /* font-family: 'Noto Sans SC', sans-serif; */
+
   line-height: 1.4;
 }
 
@@ -617,7 +868,7 @@ onMounted(() => {
 }
 
 .difficulty {
-  padding: 3px 8px;
+  padding: 3px 5px;
   border-radius: 10px;
   font-weight: 500;
   font-size: 11px;
@@ -667,6 +918,7 @@ onMounted(() => {
 
 .detail-section {
   margin-bottom: 40px;
+  font-family: 'Sarasa UI SC', sans-serif;
 }
 
 .detail-section h2 {
@@ -725,9 +977,9 @@ onMounted(() => {
 }
 
 .type-badge {
-  background-color: rgba(26, 26, 26, 0.1);
+  /* background-color: rgba(26, 26, 26, 0.1); */
   color: #1a1a1a;
-  border: 1px solid rgba(26, 26, 26, 0.3);
+  /* border: 1px solid rgba(26, 26, 26, 0.3); */
 }
 
 /* Markdown内容样式 */
@@ -736,61 +988,12 @@ onMounted(() => {
   color: #333;
 }
 
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3,
-.markdown-content h4,
-.markdown-content h5,
-.markdown-content h6 {
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  color: #1a1a1a;
-  font-weight: 600;
-}
-
-.markdown-content h1 {
-  font-size: 2em;
-  border-bottom: 2px solid #e9ecef;
-  padding-bottom: 0.3em;
-}
-
-.markdown-content h2 {
-  font-size: 1.5em;
-  border-bottom: 1px solid #e9ecef;
-  padding-bottom: 0.3em;
-}
-
-.markdown-content h3 {
-  font-size: 1.25em;
-}
-
-.markdown-content p {
-  margin-bottom: 1em;
-}
-
-.markdown-content code {
-  background-color: #f8f9fa;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family:
-    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  font-size: 0.9em;
-  color: #495057;
-}
-
-.markdown-content pre {
-  background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
+/* 改善代码块视觉效果 */
+:deep(pre[class*='language-']) {
+  position: relative;
   border-radius: 8px;
-  padding: 16px;
-  overflow-x: auto;
-  margin: 1em 0;
-}
-
-.markdown-content pre code {
-  background: none;
-  padding: 0;
-  color: #333;
+  margin: 1.5em 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .markdown-content ul,
@@ -809,6 +1012,68 @@ onMounted(() => {
   margin: 1em 0;
   color: #6c757d;
   font-style: italic;
+}
+
+/* 选择题中的markdown内容样式调整 */
+.question-text :deep(h1),
+.question-text :deep(h2),
+.question-text :deep(h3),
+.question-text :deep(h4) {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.question-text :deep(h1) {
+  font-size: 1.6em;
+}
+
+.question-text :deep(h2) {
+  font-size: 1.4em;
+}
+
+.question-text :deep(h3) {
+  font-size: 1.2em;
+}
+
+.question-text :deep(h4) {
+  font-size: 1.1em;
+}
+
+/* 针对选项文本中的标题 */
+.option-text :deep(h1),
+.option-text :deep(h2),
+.option-text :deep(h3),
+.option-text :deep(h4) {
+  font-size: 1em;
+  margin: 0.5em 0;
+}
+
+/* 确保渲染后的markdown内容在选择题中正确显示 */
+.question-text :deep(p) {
+  margin-bottom: 0.8em;
+}
+
+.question-text :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.option-text :deep(p) {
+  margin: 0;
+}
+
+.option-text :deep(code) {
+  padding: 2px 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+.feedback-explanation :deep(p) {
+  margin-bottom: 0.8em;
+}
+
+.feedback-explanation :deep(p:last-child) {
+  margin-bottom: 0;
 }
 
 .problem-content {
@@ -910,24 +1175,6 @@ onMounted(() => {
   line-height: 1.8;
   margin-bottom: 15px;
   color: #333;
-}
-
-.formula-container {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 15px 0;
-  border: 1px solid #e9ecef;
-}
-
-.formula {
-  font-family:
-    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  white-space: pre-wrap;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #333;
-  margin: 0;
 }
 
 .final-answer {
@@ -1107,6 +1354,33 @@ onMounted(() => {
   background-color: #f8f9fa;
   border-radius: 12px;
   /* border-left: 4px solid #1a1a1a; */
+}
+
+/* 确保渲染后的markdown内容在选择题中正确显示 */
+.question-text :deep(p) {
+  margin-bottom: 0.8em;
+}
+
+.question-text :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.option-text :deep(p) {
+  margin: 0;
+}
+
+.option-text :deep(code) {
+  padding: 2px 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+.feedback-explanation :deep(p) {
+  margin-bottom: 0.8em;
+}
+
+.feedback-explanation :deep(p:last-child) {
+  margin-bottom: 0;
 }
 
 .options-list {

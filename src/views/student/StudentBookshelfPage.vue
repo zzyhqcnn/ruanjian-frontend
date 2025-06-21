@@ -68,6 +68,7 @@ import { ref, onMounted, nextTick, computed } from 'vue'
 // @ts-ignore - Suppress TypeScript error for missing declaration file
 import { animate } from '@/animejs/lib/anime.esm.js'
 import Book from '@/components/book/Book.vue'
+import { books as bookData } from '@/data/student'
 
 // 页面状态
 const booksContainer = ref<HTMLElement | null>(null)
@@ -76,6 +77,9 @@ const pageCount = ref(3) // 初始页数，将根据实际内容计算更新
 const cardsPerPage = 10 // 每页显示的卡片数量（2行×5列）
 const visibleColumns = 5 // 一页显示的列数
 
+// 书籍数据
+const books = ref(bookData)
+
 // 计算总列数
 const totalColumns = computed(() => {
   // 总卡片数量（包括上传卡片）
@@ -83,88 +87,6 @@ const totalColumns = computed(() => {
   // 计算总列数
   return Math.ceil(totalCards / 2) // 每列2个卡片
 })
-
-// 书籍数据
-const books = ref([
-  {
-    id: 1,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/assets/paper.jpg',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 2,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 3,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/assets/paper.jpg',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 4,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/assets/paper.jpg',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 5,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 6,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 7,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-    description:
-      'NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。',
-  },
-  {
-    id: 8,
-    title: 'bookname.pdf',
-    author: '李玉生',
-    pages: 258,
-    format: 'PDF',
-    coverImg: '@/src/assets/cover.png',
-  },
-])
 
 // 计算页面指示器点数
 const calculatePageCount = () => {

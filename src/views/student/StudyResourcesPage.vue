@@ -25,9 +25,9 @@
           <h2 class="resource-title">学习资源</h2>
           <div class="category-section">
             <div class="categories">
-              <button class="category-tag">计算机视觉</button>
-              <button class="category-tag">深度学习</button>
-              <button class="category-tag">机器学习</button>
+              <button v-for="category in categories" :key="category.id" class="category-tag">
+                {{ category.name }}
+              </button>
             </div>
             <div class="dropdown-button">
               <img src="@/assets/icons/down-sque.svg" v-if="isDropdownOpen" alt="下拉" />
@@ -36,19 +36,15 @@
           </div>
         </div>
 
-        <div class="resource-item">
+        <div v-for="resource in resources" :key="resource.id" class="resource-item">
           <div class="resource-cover">
-            <img src="@/assets/paper.jpg" alt="资源封面" />
+            <img :src="resource.coverImage" :alt="resource.title" />
           </div>
           <div class="resource-info">
-            <h3 class="resource-name">
-              The NumPy Array: A Structure for Efficient Numerical Computation
-            </h3>
-            <span class="resource-type">朱泳全</span>
+            <h3 class="resource-name">{{ resource.title }}</h3>
+            <span class="resource-type">{{ resource.author }}</span>
             <div class="resource-meta">
-              <p class="resource-description">
-                NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。文章首先介绍了NumPy数组结构，然后展示了如何使用它进行高效的计算，最后介绍了如何与其他库共享数组数据。
-              </p>
+              <p class="resource-description">{{ resource.description }}</p>
             </div>
           </div>
         </div>
@@ -61,6 +57,8 @@
 import { ref, onMounted } from 'vue'
 import { Graph, treeToGraphData } from '@antv/g6'
 import SearchBox from '@/components/SearchBox.vue'
+import { categories, resources } from '@/data/student'
+
 const isDropdownOpen = ref(false)
 
 const toggleDropdown = () => {

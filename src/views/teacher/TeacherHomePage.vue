@@ -411,7 +411,9 @@ onBeforeUnmount(() => {
 /* 时间和日期样式 */
 .time-section {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
+  margin-top: 0;
+  z-index: 10;
 }
 
 .current-time {
@@ -429,6 +431,7 @@ onBeforeUnmount(() => {
   font-weight: 300;
   color: #1a1a1a;
   margin: 0;
+  z-index: 10;
 }
 
 .content-section {

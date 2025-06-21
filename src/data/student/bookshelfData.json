@@ -1,0 +1,75 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/assets/paper.jpg",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。"
+    },
+    {
+      "id": 2,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/assets/cover.png",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。"
+    },
+    {
+      "id": 3,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/assets/paper.jpg",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。"
+    },
+    {
+      "id": 4,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/assets/paper.jpg",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。"
+    },
+    {
+      "id": 5,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/src/assets/cover.png",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。"
+    },
+    {
+      "id": 6,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/src/assets/cover.png",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。"
+    },
+    {
+      "id": 7,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/src/assets/cover.png",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。"
+    },
+    {
+      "id": 8,
+      "title": "bookname.pdf",
+      "author": "李玉生",
+      "pages": 258,
+      "format": "PDF",
+      "coverImg": "@/src/assets/cover.png"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "计算机视觉"
+    },
+    {
+      "id": 2,
+      "name": "深度学习"
+    },
+    {
+      "id": 3,
+      "name": "机器学习"
+    }
+  ],
+  "resources": [
+    {
+      "id": 1,
+      "title": "The NumPy Array: A Structure for Efficient Numerical Computation",
+      "author": "朱泳全",
+      "description": "NumPy数组是Python世界中数值数据的标准表示形式。本文介绍了如何使用NumPy数组在高级语言中实现高效的数值计算。总体而言，有三种技术可以提高性能：向量化计算、避免在内存中复制数据以及最小化操作次数。文章首先介绍了NumPy数组结构，然后展示了如何使用它进行高效的计算，最后介绍了如何与其他库共享数组数据。",
+      "coverImage": "@/assets/paper.jpg",
+      "type": "论文"
+    }
+  ]
+}

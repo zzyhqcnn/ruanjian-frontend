@@ -32,270 +32,23 @@
       <!-- 测试卡片内容区 -->
       <div class="test-cards-container" ref="cardsContainer" @scroll="handleScroll">
         <div class="test-cards-grid">
-          <!-- 卡片 1 -->
-          <div class="test-card" @click="showDetailModal = true">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
+          <!-- 动态生成卡片 -->
+          <div
+            v-for="card in testCards"
+            :key="card.id"
+            class="test-card"
+            :style="{ backgroundColor: card.backgroundColor }"
+            @click="showDetailModal = true"
+          >
+            <div class="card-title">{{ card.title }}</div>
+            <div class="card-creator">创建者：{{ card.creator }}</div>
             <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
+              <div>发布时间：{{ card.publishTime }}</div>
+              <div>截止时间：{{ card.deadline }}</div>
             </div>
             <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <!-- 卡片 2 -->
-          <div class="test-card hadoop" @click="showDetailModal = true">
-            <div class="card-title">Hadoop综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <!-- 卡片 3 -->
-          <div class="test-card light-purple" @click="showDetailModal = true">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <!-- 卡片 4 -->
-          <div class="test-card light-green" @click="showDetailModal = true">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <!-- 卡片 5 -->
-          <div class="test-card light-blue" @click="showDetailModal = true">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <!-- 卡片 6 -->
-          <div class="test-card purple" @click="showDetailModal = true">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <!-- 卡片 7 -->
-          <div class="test-card mint">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card mint">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card mint">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card mint">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
-            </div>
-          </div>
-
-          <div class="test-card mint">
-            <div class="card-title">计算机视觉综合测试题</div>
-            <div class="card-creator">创建者：张老师</div>
-            <div class="card-time">
-              <div>发布时间：2023.6.7 19:18</div>
-              <div>截止时间：2023.6.9 19:18</div>
-            </div>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 78%"></div>
-              <div class="progress-text">78%</div>
+              <div class="progress-bar" :style="{ width: `${card.progress}%` }"></div>
+              <div class="progress-text">{{ card.progress }}%</div>
             </div>
           </div>
         </div>
@@ -329,6 +82,7 @@ import { ref, onMounted, nextTick, watch, onBeforeUnmount } from 'vue'
 // @ts-ignore - Suppress TypeScript error for missing declaration file
 import { animate } from '@/animejs/lib/anime.esm.js'
 import TestDetailModal from '@/components/TestDetailModal.vue'
+import { testCards } from '@/data/student'
 
 // 导航项数据
 const navItems = [
