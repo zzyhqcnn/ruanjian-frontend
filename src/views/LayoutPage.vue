@@ -47,12 +47,23 @@ import SplashCursor from '@/components/SplashCursor.vue'
   backdrop-filter: blur(5px);
   background-color: rgba(255, 255, 255, 0.1);
 }
-
 .logo-container {
   height: auto;
   display: flex;
   justify-content: center;
   padding: 48px 0 0 0;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .logo {

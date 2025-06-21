@@ -1,5 +1,13 @@
 <template>
   <div class="teacher-home">
+    <SnowfallBg
+      color="1a1a1a"
+      class="particles-background"
+      :min-radius="0.2"
+      :max-radius="2"
+      :speed="0.3"
+      :quantity="100"
+    />
     <!-- 时间和日期部分 -->
     <div class="time-section">
       <h1 class="current-time">{{ currentTime }}</h1>
@@ -129,6 +137,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { animate } from '@/animejs/lib/anime.esm.js'
+import SnowfallBg from '@/components/SnowfallBg.vue'
 
 // 当前时间和日期
 const currentTime = ref('23:35')
@@ -393,10 +402,16 @@ onBeforeUnmount(() => {
   height: calc(100vh - 72px);
 }
 
+.particles-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
 /* 时间和日期样式 */
 .time-section {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .current-time {
@@ -419,8 +434,9 @@ onBeforeUnmount(() => {
 .content-section {
   display: flex;
   gap: 2rem;
-  margin: 0rem auto 0; /* 上边距 2rem，左右自动（居中） */
+  margin: 4vh auto 1rem auto; /* 上边距 2rem，左右自动（居中） */
   width: 75vw;
+  max-width: 1500px;
   justify-content: space-between;
 }
 
@@ -429,19 +445,21 @@ onBeforeUnmount(() => {
   /* flex: 1; */
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem 2rem 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   width: 40vw;
+  max-width: 750px;
   position: relative; /* 添加相对定位用于绝对定位子元素 */
   height: 68vh;
+  max-height: 700px;
 }
 
 .homework-status h2 {
-  font-family: 'Noto Serof SC', serif;
-  font-size: 30px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 35px;
   margin-bottom: 1rem;
-  font-weight: 550;
-  margin-left: -10px;
+  font-weight: 650;
+  margin-left: -15px;
   color: #1a1a1a;
 }
 
@@ -449,10 +467,11 @@ onBeforeUnmount(() => {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  height: 50vh; /* 设置固定高度 */
+  height: 52vh; /* 设置固定高度 */
+  max-height: 550px;
   overflow-y: auto; /* 添加垂直滚动 */
   padding-right: 2rem; /* 为页面指示器腾出空间 */
-  border-radius: 20px;
+  /* border-radius: 20px; */
 
   /* 隐藏滚动条但保留滚动功能 */
   -ms-overflow-style: none; /* IE and Edge */
@@ -468,7 +487,7 @@ onBeforeUnmount(() => {
   padding: 0.5rem 1rem;
   background-color: #e9efef;
   position: relative;
-  height: 15vh;
+  height: 100%;
 }
 
 .homework-card.completed {
@@ -554,28 +573,30 @@ onBeforeUnmount(() => {
 
 /* 右侧：教学日历 */
 .teaching-calendar {
-  /* flex: 1.2; */
+  /* flex: 1; */
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem 2rem 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  width: 40vw;
+  max-width: 750px;
+  position: relative; /* 添加相对定位用于绝对定位子元素 */
   height: 68vh;
-  width: 38vw;
+  max-height: 700px;
 }
-
 .teaching-calendar h2 {
   font-family: 'Noto Serof SC', serif;
-  font-size: 30px;
-  margin-bottom: 1rem;
+  font-size: 35px;
+  margin-bottom: 0.7rem;
+  font-weight: 650;
   margin-left: -15px;
-  font-weight: 550;
   color: #1a1a1a;
 }
 
 .calendar-header {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .week-number {
@@ -583,7 +604,7 @@ onBeforeUnmount(() => {
   border: 1px solid #d9d9da;
   border-radius: 8px;
   padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
+  margin-right: 8px;
   height: 60px;
   display: flex;
   flex-direction: column;
@@ -655,11 +676,11 @@ onBeforeUnmount(() => {
 /* 课程表部分 */
 .schedule-section {
   display: flex;
-  margin-top: 1rem;
+  margin-top: 8px;
   /* border: 1px solid #d9d9da; */
   /* border-radius: 8px; */
   overflow: hidden;
-  height: 22.5vh;
+  height: 37%;
 }
 
 .time-slots {
@@ -702,7 +723,7 @@ onBeforeUnmount(() => {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* 7列等宽 */
-  grid-template-rows: repeat(2, calc(22.5vh / 2)); /* 每行高度=5.625vh */
+  grid-template-rows: repeat(2, 50%); /* 每行高度=5.625vh */
   gap: 1px;
   border-radius: 10px;
   border: 1px solid #d9d9da;
@@ -720,13 +741,14 @@ onBeforeUnmount(() => {
   border-radius: 4px;
   height: 90%;
   width: 80%;
-  margin: auto auto 6% auto;
+  margin: auto;
   padding: 0 5px;
 }
 
 .course-title {
   font-size: 12px;
   font-weight: 550;
+  font-family: 'Noto Sans SC', sans-serif;
   margin-top: 0.5rem;
   /* Three-line text truncation with ellipsis */
   display: -webkit-box;
