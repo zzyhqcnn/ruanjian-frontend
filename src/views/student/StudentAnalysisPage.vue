@@ -588,14 +588,16 @@ onMounted(() => {
 
 .exercise-item:hover {
   background: rgba(255, 255, 255, 0.95);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px) scale(1.02); /* 上浮2px并放大2% */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
+  transition: all 0.3s ease;
+  z-index: 1; /* 确保放大元素覆盖其他元素 */
 }
 
 .exercise-item.active {
   background: rgba(26, 26, 26, 0.1);
   border-color: rgba(26, 26, 26, 0.3);
-  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2);
+  /* box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2); */
 }
 
 .exercise-title {
