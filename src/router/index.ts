@@ -103,9 +103,54 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/teacher',
-    component: {
-      template: '<div style="font-size:40px;text-align:center;margin-top:20vh;">教师端页面</div>',
-    },
+    component: () => import('@/components/layout/TeacherLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'TeacherHome',
+        component: () => import('@/views/teacher/TeacherHomePage.vue'),
+        meta: {
+          title: '教师首页',
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'prepare',
+        name: 'TeacherPrepare',
+        component: () => h(TempRoute, { title: '智能备课' }),
+        meta: {
+          title: '智能备课',
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'analysis',
+        name: 'TeacherAnalysis',
+        component: () => h(TempRoute, { title: '学情分析' }),
+        meta: {
+          title: '学情分析',
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'assignment',
+        name: 'TeacherAssignment',
+        component: () => h(TempRoute, { title: '作业布置' }),
+        meta: {
+          title: '作业布置',
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'ai-chat',
+        name: 'TeacherAIChat',
+        component: () => h(TempRoute, { title: '智能对话' }),
+        meta: {
+          title: '智能对话',
+          requiresAuth: true,
+        },
+      },
+    ],
   },
 ]
 
