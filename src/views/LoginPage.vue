@@ -321,7 +321,7 @@ onUnmounted(() => {
   overflow: hidden;
   z-index: 1;
   backdrop-filter: blur(5px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); */
 }
 
 .carousel-content {
@@ -386,7 +386,7 @@ onUnmounted(() => {
   padding: 40px;
   border-radius: 24px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); */
 }
 
 .login-title {

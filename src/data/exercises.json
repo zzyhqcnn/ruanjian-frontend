@@ -1,0 +1,276 @@
+{
+  "exercises": [
+    {
+      "id": 1,
+      "title": "Python深度学习模型构建",
+      "type": "Python深度学习",
+      "difficulty": "hard",
+      "category": "programming",
+      "tags": ["PyTorch", "CNN", "卷积神经网络", "图像分类"],
+
+      "content": {
+        "type": "text",
+        "data": "# 构建一个简单的神经网络\n\n请使用PyTorch构建一个用于图像分类的卷积神经网络(CNN)，要求：\n\n1. 网络结构包含2个卷积层，每个卷积层后跟ReLU激活函数和最大池化层\n2. 最后包含2个全连接层\n3. 使用交叉熵损失函数\n4. 实现训练循环，包含前向传播、反向传播和参数更新\n\n请提供完整的代码实现。"
+      },
+
+      "images": [
+        {
+          "url": "/images/cnn-architecture.png",
+          "description": "CNN网络架构图",
+          "alt": "卷积神经网络结构示意图"
+        }
+      ],
+
+      "knowledgePoints": ["PyTorch", "CNN", "卷积神经网络", "图像分类", "反向传播", "激活函数"],
+
+      "knowledgeExplanation": "## 卷积神经网络(CNN)基础\n\n卷积神经网络是深度学习中最常用的图像处理模型之一，主要特点包括：\n\n### 核心组件\n- **卷积层(Convolutional Layer)**: 提取图像特征\n- **激活函数(Activation Function)**: 引入非线性\n- **池化层(Pooling Layer)**: 降维和特征选择\n- **全连接层(Fully Connected Layer)**: 最终分类\n\n### PyTorch框架\nPyTorch提供了灵活的深度学习开发环境，支持动态计算图和自动微分。",
+
+      "solutionSteps": [
+        {
+          "title": "导入必要的库",
+          "explanation": "首先导入PyTorch相关库和其他必要的模块：\n\n```python\nimport torch\nimport torch.nn as nn\nimport torch.optim as optim\nimport torch.nn.functional as F\n```",
+          "formula": "import torch\nimport torch.nn as nn\nimport torch.optim as optim\nimport torch.nn.functional as F"
+        },
+        {
+          "title": "定义CNN网络结构",
+          "explanation": "创建一个继承自nn.Module的类，定义网络结构：\n\n```python\nclass SimpleCNN(nn.Module):\n    def __init__(self, num_classes=10):\n        super(SimpleCNN, self).__init__()\n        # 第一个卷积块\n        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(2, 2)\n        \n        # 第二个卷积块\n        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)\n        \n        # 全连接层\n        self.fc1 = nn.Linear(32 * 8 * 8, 128)\n        self.fc2 = nn.Linear(128, num_classes)\n    \n    def forward(self, x):\n        # 第一个卷积块\n        x = self.pool(F.relu(self.conv1(x)))\n        \n        # 第二个卷积块\n        x = self.pool(F.relu(self.conv2(x)))\n        \n        # 展平\n        x = x.view(-1, 32 * 8 * 8)\n        \n        # 全连接层\n        x = F.relu(self.fc1(x))\n        x = self.fc2(x)\n        \n        return x\n```",
+          "formula": "class SimpleCNN(nn.Module):\n    def __init__(self, num_classes=10):\n        super(SimpleCNN, self).__init__()\n        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(2, 2)\n        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)\n        self.fc1 = nn.Linear(32 * 8 * 8, 128)\n        self.fc2 = nn.Linear(128, num_classes)\n    \n    def forward(self, x):\n        x = self.pool(F.relu(self.conv1(x)))\n        x = self.pool(F.relu(self.conv2(x)))\n        x = x.view(-1, 32 * 8 * 8)\n        x = F.relu(self.fc1(x))\n        x = self.fc2(x)\n        return x"
+        }
+      ],
+
+      "answer": {
+        "type": "text",
+        "data": "## 完整代码实现\n\n```python\nimport torch\nimport torch.nn as nn\nimport torch.optim as optim\nimport torch.nn.functional as F\n\nclass SimpleCNN(nn.Module):\n    def __init__(self, num_classes=10):\n        super(SimpleCNN, self).__init__()\n        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(2, 2)\n        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)\n        self.fc1 = nn.Linear(32 * 8 * 8, 128)\n        self.fc2 = nn.Linear(128, num_classes)\n    \n    def forward(self, x):\n        x = self.pool(F.relu(self.conv1(x)))\n        x = self.pool(F.relu(self.conv2(x)))\n        x = x.view(-1, 32 * 8 * 8)\n        x = F.relu(self.fc1(x))\n        x = self.fc2(x)\n        return x\n\n# 初始化模型\nmodel = SimpleCNN()\ncriterion = nn.CrossEntropyLoss()\noptimizer = optim.Adam(model.parameters(), lr=0.001)\n\n# 训练模型\ntrain_model(model, train_loader, criterion, optimizer)\n```\n\n这个实现包含了完整的CNN网络结构，满足所有要求。"
+      },
+
+      "similarExercises": [
+        {
+          "id": 101,
+          "title": "PyTorch数据加载与预处理",
+          "difficulty": "medium",
+          "type": "Python深度学习"
+        },
+        {
+          "id": 102,
+          "title": "CNN可视化与特征提取",
+          "difficulty": "hard",
+          "type": "Python深度学习"
+        }
+      ],
+
+      "metadata": {
+        "createdAt": "2024-01-15T10:00:00Z",
+        "updatedAt": "2024-01-15T10:00:00Z",
+        "author": "AI助教",
+        "estimatedTime": 30,
+        "points": 100
+      }
+    },
+
+    {
+      "id": 2,
+      "title": "Linux系统进程管理",
+      "type": "Linux系统管理",
+      "difficulty": "medium",
+      "category": "system",
+      "tags": ["进程管理", "ps命令", "top命令", "kill命令", "nice命令"],
+
+      "content": {
+        "type": "text",
+        "data": "# Linux进程管理实战\n\n请完成以下Linux系统管理任务：\n\n1. 查看当前系统中所有运行的进程\n2. 查找占用CPU最高的进程\n3. 杀死指定进程ID的进程\n4. 设置进程优先级\n5. 创建后台进程\n\n请提供相应的命令和解释。"
+      },
+
+      "knowledgePoints": ["进程管理", "ps命令", "top命令", "kill命令", "nice命令"],
+
+      "knowledgeExplanation": "## Linux进程管理基础\n\nLinux进程管理是系统管理员的核心技能之一，涉及进程的创建、监控、控制和终止。\n\n### 关键概念\n- **进程(Process)**: 正在运行的程序实例\n- **进程ID(PID)**: 每个进程的唯一标识符\n- **父进程(PPID)**: 创建当前进程的进程ID\n- **进程状态**: 运行、睡眠、停止、僵尸等\n\n### 常用命令\n- **ps**: 显示进程状态\n- **top**: 实时监控系统进程\n- **kill**: 终止进程\n- **nice/renice**: 调整进程优先级",
+
+      "solutionSteps": [
+        {
+          "title": "查看所有运行进程",
+          "explanation": "使用ps命令查看进程信息：\n\n```bash\n# 查看所有进程\nps aux\n\n# 查看特定用户的进程\nps -u username\n\n# 查看进程树\nps -ef --forest\n```\n\n**命令解释**:\n- `ps aux`: 显示所有用户的进程\n- `a`: 显示所有进程\n- `u`: 显示详细信息\n- `x`: 显示没有控制终端的进程",
+          "formula": "ps aux\nps -u username\nps -ef --forest"
+        }
+      ],
+
+      "answer": {
+        "type": "text",
+        "data": "## 完整解决方案\n\n### 1. 查看所有进程\n```bash\nps aux\n```\n\n### 2. 查找CPU占用最高的进程\n```bash\nps aux --sort=-%cpu | head -5\n```\n\n### 3. 杀死进程\n```bash\nkill PID          # 优雅终止\nkill -9 PID       # 强制终止\n```\n\n### 4. 设置进程优先级\n```bash\nnice -n 10 command    # 启动时设置优先级\nrenice 10 PID         # 修改运行中进程的优先级\n```\n\n### 5. 创建后台进程\n```bash\ncommand &             # 后台运行\nnohup command &       # 后台运行且忽略挂起信号\n```"
+      },
+
+      "similarExercises": [
+        {
+          "id": 201,
+          "title": "Linux文件权限管理",
+          "difficulty": "medium",
+          "type": "Linux系统管理"
+        },
+        {
+          "id": 202,
+          "title": "Linux网络配置",
+          "difficulty": "hard",
+          "type": "Linux系统管理"
+        }
+      ],
+
+      "metadata": {
+        "createdAt": "2024-01-15T11:00:00Z",
+        "updatedAt": "2024-01-15T11:00:00Z",
+        "author": "AI助教",
+        "estimatedTime": 20,
+        "points": 80
+      }
+    },
+
+    {
+      "id": 3,
+      "title": "Python数据分析与可视化",
+      "type": "Python数据分析",
+      "difficulty": "medium",
+      "category": "data_analysis",
+      "tags": ["pandas", "matplotlib", "数据清洗", "数据可视化", "统计分析"],
+
+      "content": {
+        "type": "text",
+        "data": "# 使用Python进行数据分析\n\n请使用pandas和matplotlib完成以下数据分析任务：\n\n1. 读取CSV文件数据\n2. 数据清洗和预处理\n3. 计算基本统计信息\n4. 创建多种类型的图表\n5. 保存分析结果\n\n数据文件包含销售数据，包括日期、产品、销售额、地区等字段。"
+      },
+
+      "knowledgePoints": ["pandas", "matplotlib", "数据清洗", "数据可视化", "统计分析"],
+
+      "knowledgeExplanation": "## Python数据分析基础\n\nPython是数据分析领域的主流语言，主要工具包括：\n\n### 核心库\n- **pandas**: 数据处理和分析\n- **matplotlib**: 数据可视化\n- **numpy**: 数值计算\n- **seaborn**: 统计图表\n\n### 数据分析流程\n1. 数据加载\n2. 数据探索\n3. 数据清洗\n4. 数据分析\n5. 结果可视化",
+
+      "solutionSteps": [
+        {
+          "title": "数据加载与探索",
+          "explanation": "首先加载数据并了解数据结构：\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# 读取数据\ndf = pd.read_csv('sales_data.csv')\n\n# 查看数据基本信息\nprint(df.info())\nprint(df.head())\nprint(df.describe())\n\n# 检查缺失值\nprint(df.isnull().sum())\n```",
+          "formula": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\ndf = pd.read_csv('sales_data.csv')\nprint(df.info())\nprint(df.head())\nprint(df.describe())"
+        }
+      ],
+
+      "answer": {
+        "type": "text",
+        "data": "## 完整数据分析代码\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# 1. 数据加载\ndf = pd.read_csv('sales_data.csv')\n\n# 2. 数据清洗\ndf = df.dropna()\ndf['date'] = pd.to_datetime(df['date'])\n\n# 3. 统计分析\nprint(\"基本统计信息:\")\nprint(df.describe())\n\nprint(\"\\n按产品统计:\")\nprint(df.groupby('product')['sales'].agg(['sum', 'mean', 'count']))\n\n# 4. 可视化\nplt.style.use('seaborn')\nfig, axes = plt.subplots(2, 2, figsize=(15, 10))\n\ndf.groupby('date')['sales'].sum().plot(ax=axes[0,0], title='Sales Over Time')\ndf.groupby('product')['sales'].sum().plot(kind='bar', ax=axes[0,1], title='Sales by Product')\ndf.groupby('region')['sales'].sum().plot(kind='pie', ax=axes[1,0], title='Sales by Region')\ndf['sales'].hist(ax=axes[1,1], bins=30, title='Sales Distribution')\n\nplt.tight_layout()\nplt.savefig('sales_analysis.png', dpi=300, bbox_inches='tight')\nplt.show()\n\n# 5. 保存结果\ndf.to_csv('cleaned_sales_data.csv', index=False)\n```"
+      },
+
+      "similarExercises": [
+        {
+          "id": 301,
+          "title": "Python机器学习基础",
+          "difficulty": "hard",
+          "type": "Python数据分析"
+        },
+        {
+          "id": 302,
+          "title": "数据预处理技术",
+          "difficulty": "medium",
+          "type": "Python数据分析"
+        }
+      ],
+
+      "metadata": {
+        "createdAt": "2024-01-15T12:00:00Z",
+        "updatedAt": "2024-01-15T12:00:00Z",
+        "author": "AI助教",
+        "estimatedTime": 25,
+        "points": 90
+      }
+    },
+
+    {
+      "id": 4,
+      "title": "计算机网络基础选择题",
+      "type": "计算机网络",
+      "difficulty": "easy",
+      "category": "multiple_choice",
+      "tags": ["网络协议", "TCP/IP", "OSI模型", "HTTP"],
+
+      "content": {
+        "type": "multiple_choice",
+        "question": "在OSI七层模型中，HTTP协议工作在以下哪一层？",
+        "options": [
+          {
+            "id": "A",
+            "text": "物理层",
+            "explanation": "物理层负责比特流的传输，如网线、光纤等物理介质"
+          },
+          {
+            "id": "B",
+            "text": "数据链路层",
+            "explanation": "数据链路层负责帧的传输和错误检测，如以太网协议"
+          },
+          {
+            "id": "C",
+            "text": "网络层",
+            "explanation": "网络层负责路由和寻址，如IP协议"
+          },
+          {
+            "id": "D",
+            "text": "应用层",
+            "explanation": "HTTP是超文本传输协议，工作在应用层，用于Web浏览器和服务器之间的通信"
+          }
+        ],
+        "correctAnswer": "D",
+        "explanation": "HTTP（HyperText Transfer Protocol）是应用层协议，用于在Web浏览器和Web服务器之间传输超文本数据。它建立在TCP协议之上，是万维网数据通信的基础。"
+      },
+
+      "knowledgePoints": ["OSI七层模型", "HTTP协议", "应用层协议", "网络协议栈"],
+
+      "knowledgeExplanation": "## OSI七层模型\n\nOSI（Open Systems Interconnection）模型是一个概念性的网络架构模型，将网络通信分为七个层次：\n\n### 七层结构（从上到下）：\n1. **应用层（Application Layer）**: 为用户提供网络服务接口\n   - 协议：HTTP、HTTPS、FTP、SMTP、DNS\n2. **表示层（Presentation Layer）**: 数据格式转换和加密\n3. **会话层（Session Layer）**: 建立、管理和终止会话\n4. **传输层（Transport Layer）**: 端到端的数据传输\n   - 协议：TCP、UDP\n5. **网络层（Network Layer）**: 路由和寻址\n   - 协议：IP、ICMP、ARP\n6. **数据链路层（Data Link Layer）**: 帧的传输和错误检测\n   - 协议：以太网、WiFi\n7. **物理层（Physical Layer）**: 比特流的物理传输\n\n### HTTP协议特点\n- 无状态协议\n- 基于请求-响应模式\n- 支持多种HTTP方法（GET、POST、PUT、DELETE等）\n- 可扩展的头部字段",
+
+      "solutionSteps": [
+        {
+          "title": "理解OSI模型层次",
+          "explanation": "OSI七层模型是一个概念性的网络架构，每一层都有特定的功能和协议。理解各层的作用是解答此类题目的关键。",
+          "formula": "应用层 → 表示层 → 会话层 → 传输层 → 网络层 → 数据链路层 → 物理层"
+        },
+        {
+          "title": "分析HTTP协议特性",
+          "explanation": "HTTP是超文本传输协议，主要用于Web浏览器和服务器之间的通信。它工作在应用层，为用户提供Web服务。",
+          "formula": "HTTP = 应用层协议 + Web通信 + 请求-响应模式"
+        },
+        {
+          "title": "排除错误选项",
+          "explanation": "通过分析各层的特点，可以排除明显错误的选项：\n- 物理层：处理比特流传输\n- 数据链路层：处理帧传输\n- 网络层：处理路由寻址\n- 应用层：处理用户服务",
+          "formula": "排除法：物理层、数据链路层、网络层都不是应用层协议"
+        }
+      ],
+
+      "answer": {
+        "type": "multiple_choice",
+        "correctAnswer": "D",
+        "explanation": "正确答案是D。HTTP（HyperText Transfer Protocol）是应用层协议，用于在Web浏览器和Web服务器之间传输超文本数据。它建立在TCP协议之上，是万维网数据通信的基础。\n\n**详细解释**：\n- HTTP协议工作在OSI七层模型的应用层\n- 它为用户提供Web浏览服务\n- 支持多种HTTP方法（GET、POST等）\n- 是无状态的协议\n- 可以传输文本、图片、视频等多种类型的数据"
+      },
+
+      "similarExercises": [
+        {
+          "id": 401,
+          "title": "TCP与UDP协议对比",
+          "difficulty": "medium",
+          "type": "计算机网络"
+        },
+        {
+          "id": 402,
+          "title": "IP地址与子网划分",
+          "difficulty": "medium",
+          "type": "计算机网络"
+        }
+      ],
+
+      "metadata": {
+        "createdAt": "2024-01-15T13:00:00Z",
+        "updatedAt": "2024-01-15T13:00:00Z",
+        "author": "AI助教",
+        "estimatedTime": 5,
+        "points": 20
+      }
+    }
+  ],
+
+  "metadata": {
+    "version": "1.0.0",
+    "totalExercises": 4,
+    "categories": ["programming", "system", "data_analysis", "multiple_choice"],
+    "difficulties": ["easy", "medium", "hard"],
+    "types": ["Python深度学习", "Linux系统管理", "Python数据分析", "计算机网络"],
+    "lastUpdated": "2024-01-15T13:00:00Z"
+  }
+}
