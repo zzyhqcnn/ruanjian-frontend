@@ -65,7 +65,11 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'analysis',
         name: 'StudentAnalysis',
-        component: () => h(TempRoute, { title: '习题分析' }),
+        component: () => import('@/views/student/StudentAnalysisPage.vue'),
+        meta: {
+          title: '习题分析',
+          requiresAuth: true,
+        },
       },
       {
         path: 'resources',

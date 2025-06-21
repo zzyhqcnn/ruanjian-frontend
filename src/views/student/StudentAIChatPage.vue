@@ -414,14 +414,14 @@ const toggleDeepThinking = () => {
 /* 消息显示区域样式 */
 .messages-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-bottom: 20px;
   overflow-y: auto;
-  max-height: calc(100vh - 300px);
+  max-height: calc(100vh - 250px);
 }
 
 .message-wrapper {
@@ -469,7 +469,8 @@ const toggleDeepThinking = () => {
 .user-message .message-content {
   background-color: #1a1a1a;
   color: white;
-  border-radius: 18px 18px 4px 18px;
+  border-radius: 18px 5px 18px 18px;
+  margin-top: 10px;
   margin-right: 10px;
 }
 
@@ -478,7 +479,7 @@ const toggleDeepThinking = () => {
   color: #1a1a1a;
   border-radius: 18px 18px 18px 4px;
   font-family: 'Sarasa UI SC', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 16px;
 }
 
@@ -504,8 +505,8 @@ const toggleDeepThinking = () => {
 }
 
 .chat-input-container {
-  width: 50vw;
-  max-width: 800px;
+  width: 60vw;
+  max-width: 1000px;
   position: relative; /* 或 `absolute` / `fixed`，取决于你的布局需求 */
   left: 50%; /* 移动到父容器的 50% 位置 */
   transform: translateX(-50%); /* 向左回移自身宽度的一半，实现居中 */
@@ -521,8 +522,8 @@ const toggleDeepThinking = () => {
   /* margin-left: 5%; */
   height: 90px;
   /* border-radius: 35px; */
-  margin-top: 15px;
-  margin-left: 25px;
+  margin-top: 20px;
+  margin-left: 30px;
   /* border: 1px solid #d9d9da; */
   /* padding: 1rem 1.5rem; */
   /* padding-bottom: calc(1rem + 3.5rem); */

@@ -314,10 +314,10 @@
     </div>
 
     <!-- 底部按钮 -->
-    <!-- <div class="action-button">
+    <div class="action-button">
       作业生成
       <span class="arrow-down">&#9660;</span>
-    </div> -->
+    </div>
 
     <!-- 详情弹窗 - 使用分离出的组件 -->
     <TestDetailModal v-model="showDetailModal" :test-data="activeCard" @close="closeDetailModal" />
