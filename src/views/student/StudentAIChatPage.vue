@@ -9,9 +9,28 @@
 
     <!-- Chat messages display area -->
     <div class="messages-container" v-if="messages.length > 0">
+      <ScrollIsland
+        v-if="!isShowHeader"
+        title="知行智联"
+        class="mt-10"
+        containerSelector=".messages-container"
+      >
+        <div class="my-3 flex flex-col gap-2">
+          <!-- 动态生成用户消息链接 -->
+          <template v-for="(message, index) in userMessages" :key="index">
+            <a :href="`#message-${index}`" @click="scrollToMessage(index)" class="scroll-link">
+              {{ getFirstFiveChars(message.text) }}
+            </a>
+          </template>
+        </div>
+      </ScrollIsland>
       <div v-for="(message, index) in messages" :key="index" class="message-wrapper">
         <!-- User message -->
-        <div v-if="message.isUser" class="user-message">
+        <div
+          v-if="message.isUser"
+          class="user-message"
+          :id="`message-${userMessages.findIndex((m) => m === message)}`"
+        >
           <div class="message-content">{{ message.text }}</div>
           <div class="user-avatar">
             <img src="@/assets/avatar.png" alt="User Avatar" />
@@ -69,7 +88,7 @@
         </div>
       </div>
 
-      <div class="bottom-tools">
+      <div class="bottom-tools" v-if="isShowHeader">
         <button class="tool-btn bor" @click="handleKnowledgeExplanation">
           <img src="@/assets/icons/knowledge.svg" alt="Knowledge Explanation" />
           <span class="button-text">知识讲解</span>
@@ -96,7 +115,8 @@
 
 <script setup lang="ts">
 // Import animations
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import ScrollIsland from '@/components/ScrollIsland.vue'
 
 // State variables
 const userInput = ref('')
@@ -114,6 +134,24 @@ interface ChatMessage {
 
 // 聊天消息列表
 const messages = ref<ChatMessage[]>([])
+
+// 计算属性：只获取用户消息
+const userMessages = computed(() => {
+  return messages.value.filter((message) => message.isUser)
+})
+
+// 获取前5个字符的函数
+const getFirstFiveChars = (text: string): string => {
+  return text.length > 5 ? text.substring(0, 5) + '...' : text
+}
+
+// 滚动到指定消息
+const scrollToMessage = (index: number) => {
+  const messageElement = document.getElementById(`message-${index}`)
+  if (messageElement) {
+    messageElement.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 
 // 获取AI回复
 const getAIResponse = (question: string): string => {
@@ -250,6 +288,24 @@ const handleTestGeneration = () => {
   const textarea = document.querySelector('.chat-input') as HTMLTextAreaElement
   textarea?.focus()
 }
+
+const scrollToLatestMessage = () => {
+  const messagesContainer = document.querySelector('.messages-container')
+  if (messagesContainer) {
+    messagesContainer.scrollTop = messagesContainer.scrollHeight
+  }
+}
+
+const scrollToFirstMessage = () => {
+  const messagesContainer = document.querySelector('.messages-container')
+  if (messagesContainer) {
+    messagesContainer.scrollTop = 0
+  }
+}
+
+const toggleDeepThinking = () => {
+  handleDeepThinking()
+}
 </script>
 
 <style scoped>
@@ -266,6 +322,59 @@ const handleTestGeneration = () => {
   background-color: #f5f7fa;
 }
 
+/* ScrollIsland styles */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-primary {
+  color: #1a1a1a;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+/* ScrollIsland links */
+.my-3 a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.my-3 a:hover {
+  color: #ffffff;
+}
+
+/* Original styles */
 .header {
   position: relative;
   text-align: center;
@@ -342,9 +451,10 @@ const handleTestGeneration = () => {
 
 .ai-message {
   align-self: flex-start;
-  margin-left: 50px; /* 对齐用户头像下方 */
+  /* margin-left: 50px; 对齐用户头像下方 */
   margin-bottom: 5px;
-  max-width: 80%;
+  max-width: 100%;
+  /* width: 100%; */
 }
 
 .message-content {
@@ -367,6 +477,9 @@ const handleTestGeneration = () => {
   background-color: #f5f7fa;
   color: #1a1a1a;
   border-radius: 18px 18px 18px 4px;
+  font-family: 'Sarasa UI SC', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .user-avatar {
@@ -561,5 +674,9 @@ const handleTestGeneration = () => {
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 500;
   transition: color 0.3s ease; /* 添加颜色过渡动画 */
+}
+
+.scroll-link {
+  color: #1a1a1a;
 }
 </style>

@@ -538,7 +538,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh; /* 使用视口高度 */
+  height: 100%; /* 使用视口高度 */
   /* padding: 2rem; */
   background-color: #f5f7fa;
   position: relative; /* 添加相对定位，用于绝对定位子元素 */
@@ -549,6 +549,7 @@ onBeforeUnmount(() => {
 /* 主卡片样式 */
 .main-card {
   width: 90vw;
+  max-width: 2000px;
   height: 85vh; /* 使用视口高度的85% */
   background-color: white;
   border-radius: 30px;

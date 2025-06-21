@@ -9,7 +9,7 @@
     <div
       :class="
         cn(
-          'fixed left-1/2 top-12 z-[999] -translate-x-1/2 bg-primary/90 backdrop-blur-lg border-radius',
+          'fixed left-1/2 top-12 z-[999] -translate-x-1/2 bg-primary/90 bg-black backdrop-blur-lg border-radius',
           $props.class,
         )
       "
@@ -28,7 +28,7 @@
         }"
         class="bg-natural-900 relative cursor-pointer overflow-hidden text-secondary"
       >
-        <header class="gray- flex h-11 cursor-pointer items-center gap-2 px-4">
+        <header class="gray- flex h-11 cursor-pointer items-center gap-2 px-4 text-white">
           <AnimatedCircularProgressBar
             :value="scrollPercentage * 100"
             :min="0"
@@ -59,24 +59,28 @@ import { cn } from '@/lib/utils'
 import NumberFlow from '@number-flow/vue'
 import { useColorMode } from '@vueuse/core'
 import { motion, MotionConfig } from 'motion-v'
-import { computed, onMounted, onUnmounted, ref, useSlots } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useSlots, watch } from 'vue'
+import AnimatedCircularProgressBar from './AnimatedCircularProgressBar.vue'
 
 interface Props {
   class?: string
   title?: string
   height?: number
+  containerSelector?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   class: '',
   title: 'Progress',
   height: 44,
+  containerSelector: '',
 })
 
 const open = ref(false)
 const slots = useSlots()
 
 const scrollPercentage = ref(0)
+const scrollContainer = ref<HTMLElement | null>(null)
 
 const isDark = computed(() => useColorMode().value == 'dark')
 const isSlotAvailable = computed(() => !!slots.default)
@@ -85,16 +89,40 @@ const borderRadius = computed(() => `${props.height / 2}px`)
 onMounted(() => {
   if (window === undefined) return
 
-  window.addEventListener('scroll', updatePageScroll)
-  updatePageScroll()
+  // Use container if provided, otherwise use window
+  if (props.containerSelector) {
+    scrollContainer.value = document.querySelector(props.containerSelector)
+    if (scrollContainer.value) {
+      scrollContainer.value.addEventListener('scroll', updateContainerScroll)
+      updateContainerScroll()
+    } else {
+      console.warn(`Container with selector "${props.containerSelector}" not found`)
+      window.addEventListener('scroll', updatePageScroll)
+      updatePageScroll()
+    }
+  } else {
+    window.addEventListener('scroll', updatePageScroll)
+    updatePageScroll()
+  }
 })
 
 function updatePageScroll() {
   scrollPercentage.value = window.scrollY / (document.body.scrollHeight - window.innerHeight)
 }
 
+function updateContainerScroll() {
+  if (scrollContainer.value) {
+    const { scrollTop, scrollHeight, clientHeight } = scrollContainer.value
+    scrollPercentage.value = scrollTop / (scrollHeight - clientHeight || 1) // Avoid division by zero
+  }
+}
+
 onUnmounted(() => {
-  window.removeEventListener('scroll', updatePageScroll)
+  if (props.containerSelector && scrollContainer.value) {
+    scrollContainer.value.removeEventListener('scroll', updateContainerScroll)
+  } else {
+    window.removeEventListener('scroll', updatePageScroll)
+  }
 })
 </script>
 
